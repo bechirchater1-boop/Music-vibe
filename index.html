@@ -4,132 +4,198 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MUSIC VIBE</title>
+<meta name="theme-color" content="#090811">
+<title>MUSIC VIBE | Your Music World</title>
+
 <style>
-*{box-sizing:border-box}
-body{margin:0;background:#090810;color:white;font-family:Arial,sans-serif}
-header{padding:22px 7%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #292137}
-.logo{font-size:26px;font-weight:bold;color:#b75cff}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#090811;color:#fff;font-family:Arial,sans-serif}
+header{height:75px;padding:0 7%;display:flex;align-items:center;justify-content:space-between;background:#100d19;border-bottom:1px solid #292033}
+.logo{font-size:26px;font-weight:900;color:#b85aff}
 .logo span{color:white}
-header small{color:#aaa}
-.hero{text-align:center;padding:55px 15px 35px;background:radial-gradient(ellipse at top,#34164d,transparent 70%)}
-.hero h1{font-size:clamp(35px,7vw,65px);margin:10px}
-.hero h1 span{color:#bd65ff}
-.hero p{color:#aaa}
-.search{max-width:520px;margin:25px auto}
-input{width:100%;padding:16px 22px;border-radius:30px;background:#171421;border:1px solid #7541a5;color:white;font-size:16px;outline:none}
-main{max-width:1100px;margin:auto;padding:25px}
-nav{display:flex;gap:12px;flex-wrap:wrap;margin:20px 0 30px}
-nav button{background:#21172c;color:#ddd;border:1px solid #392449}
-button{cursor:pointer;border:0;border-radius:25px;padding:11px 17px;background:#a94cff;color:white}
-button:hover{filter:brightness(1.2)}
-.section-title{display:flex;justify-content:space-between;align-items:center}
-h2{font-size:22px}
-.songs{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:18px}
-.song{background:#171421;padding:14px;border:1px solid #30233d;border-radius:17px}
-.cover{height:145px;border-radius:12px;display:grid;place-items:center;font-size:55px;background:linear-gradient(135deg,#37105f,#b34cff)}
-.song h3{margin-bottom:5px}
-.song p{color:#999;font-size:13px;margin-top:5px}
-.actions{display:flex;justify-content:space-between;align-items:center;margin-top:15px}
-.heart{background:#292033;font-size:18px;padding:8px 12px}
-.heart.active{color:#ff5b9c}
-#player{position:sticky;bottom:0;background:#171421;border-top:1px solid #7541a5;padding:15px 5%;display:flex;justify-content:center;align-items:center;gap:15px;flex-wrap:wrap}
-#now{color:#d9b2ff}
-audio{width:min(420px,100%)}
-footer{text-align:center;padding:35px;color:#777}
+header a{color:#ddd;text-decoration:none}
+.hero{text-align:center;padding:85px 15px;background:radial-gradient(ellipse at center,#40145f,#090811 70%)}
+.hero h1{font-size:clamp(42px,8vw,75px);font-weight:900}
+.hero h1 span{color:#bb62ff}
+.hero p{color:#bbb;margin:18px}
+.search{max-width:520px;margin:30px auto}
+.search input{width:100%;padding:17px 22px;border-radius:30px;background:#1b1525;border:1px solid #7743a3;color:white;font-size:16px;outline:none}
+main{max-width:1100px;margin:auto;padding:30px 20px}
+h2{font-size:25px;margin:15px 0 22px}
+.purple{color:#c17aff}
+.categories{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:35px}
+.categories button{padding:12px 22px;border:1px solid #49305e;border-radius:25px;background:#1a1424;color:white;cursor:pointer}
+.categories button:hover,.categories button.active{background:#a443e9}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:18px}
+.artist{background:#171321;border:1px solid #30233d;border-radius:17px;padding:17px;transition:.2s}
+.artist:hover{transform:translateY(-4px);border-color:#a64bea}
+.cover{height:135px;border-radius:12px;display:grid;place-items:center;font-size:55px;margin-bottom:15px;background:linear-gradient(135deg,#321047,#9d43dc)}
+.artist h3{margin-bottom:8px}
+.artist p{color:#aaa;font-size:13px}
+.actions{display:flex;justify-content:space-between;align-items:center;margin-top:17px}
+button{cursor:pointer}
+.play{background:#a94bea;color:white;padding:10px 17px;border:0;border-radius:25px}
+.fav{background:#292033;color:#fff;border:0;border-radius:50%;padding:9px;font-size:18px}
+.fav.active{color:#ff4e9b}
+.music-section{margin-top:55px}
+.spotify{width:100%;height:450px;border:0;border-radius:15px}
+.links{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px}
+.link-card{background:#171321;padding:22px;border-radius:15px;border:1px solid #30233d}
+.link-card p{color:#aaa;margin:12px 0}
+.link-card a{color:#c17aff;text-decoration:none}
+footer{text-align:center;padding:40px;color:#777;border-top:1px solid #292033;margin-top:50px}
+@media(max-width:600px){
+header{padding:0 5%}
+.hero{padding:60px 12px}
+main{padding:20px 14px}
+}
 </style>
 </head>
+
 <body>
+
 <header>
 <div class="logo">MUSIC <span>VIBE</span></div>
-<small>YOUR MUSIC WORLD 🎧</small>
+<a href="#music">🎧 Discover</a>
 </header>
 
 <section class="hero">
 <h1>FEEL THE <span>MUSIC</span></h1>
-<p>Discover your sound. Live your vibe.</p>
+<p>Your music. Your world. Your vibe.</p>
 <div class="search">
-<input id="search" placeholder="🔍 Search your music..." oninput="render()">
+<input id="search" placeholder="🔍 Search artists..." oninput="render()">
 </div>
 </section>
 
 <main>
-<nav>
-<button onclick="setCategory('All')">All Music</button>
-<button onclick="setCategory('Chill')">Chill</button>
-<button onclick="setCategory('Rap')">Rap</button>
-<button onclick="setCategory('Arabic')">Arabic</button>
-<button onclick="showFavorites()">❤️ Favorites</button>
-</nav>
 
-<div class="section-title">
-<h2 id="heading">🔥 Discover Music</h2>
+<h2>🎵 Explore <span class="purple">Music</span></h2>
+
+<div class="categories">
+<button class="active" onclick="setCategory('All',this)">All</button>
+<button onclick="setCategory('Rap',this)">Rap</button>
+<button onclick="setCategory('Arabic',this)">Arabic</button>
+<button onclick="setCategory('Chill',this)">Chill</button>
+<button onclick="setCategory('Favorites',this)">❤️ Favorites</button>
 </div>
-<div class="songs" id="songs"></div>
+
+<div class="grid" id="artists"></div>
+
+<section class="music-section" id="music">
+<h2>🇹🇳 TUNISIAN <span class="purple">RAP</span></h2>
+<p style="color:#aaa;margin-bottom:20px">
+The sound of Tunisia. Discover your favorite rappers.
+</p>
+
+<iframe
+class="spotify"
+src="https://open.spotify.com/embed/playlist/3bKNtz9LrjwlIIrjCr0ZIO?utm_source=generator&theme=0"
+allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+loading="lazy">
+</iframe>
+</section>
+
+<section class="music-section">
+<h2>🌍 More <span class="purple">Music</span></h2>
+
+<div class="links">
+<div class="link-card">
+<h3>🎤 Rap & Hip-Hop</h3>
+<p>Discover rap and hip-hop music.</p>
+<a href="https://open.spotify.com/search/rap" target="_blank">Explore Rap →</a>
+</div>
+
+<div class="link-card">
+<h3>🇦🇪 Arabic Music</h3>
+<p>Enjoy Arabic songs and artists.</p>
+<a href="https://open.spotify.com/search/arabic" target="_blank">Explore Arabic →</a>
+</div>
+
+<div class="link-card">
+<h3>🌙 Chill & Relax</h3>
+<p>Relax with your favorite sounds.</p>
+<a href="https://open.spotify.com/search/chill" target="_blank">Explore Chill →</a>
+</div>
+</div>
+</section>
+
 </main>
 
-<div id="player">
-<strong id="now">Choose a song 🎵</strong>
-<audio id="audio" controls></audio>
-</div>
-
-<footer>© 2026 MUSIC VIBE · Made for music lovers ❤️</footer>
+<footer>
+<div class="logo">MUSIC <span>VIBE</span></div>
+<p style="margin-top:12px">Feel every beat. Live every moment. ❤️</p>
+<p style="margin-top:15px;font-size:12px">© 2026 MUSIC VIBE</p>
+</footer>
 
 <script>
-const tracks=[
-{name:"Chill Vibes",artist:"SoundHelix",category:"Chill",emoji:"🌙",url:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"},
-{name:"Night Music",artist:"SoundHelix",category:"Chill",emoji:"🌃",url:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"},
-{name:"Dream Vibes",artist:"SoundHelix",category:"Chill",emoji:"✨",url:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"},
-{name:"Rap Energy",artist:"SoundHelix",category:"Rap",emoji:"🎤",url:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3"},
-{name:"Arabic Mood",artist:"SoundHelix",category:"Arabic",emoji:"🎶",url:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3"},
-{name:"Deep Feeling",artist:"SoundHelix",category:"Chill",emoji:"💜",url:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3"}
+const artists=[
+{name:"Samara",genre:"Rap",emoji:"🎤"},
+{name:"Balti",genre:"Rap",emoji:"🔥"},
+{name:"Klay BBJ",genre:"Rap",emoji:"🎧"},
+{name:"Nordo",genre:"Rap",emoji:"🌟"},
+{name:"Kaso",genre:"Rap",emoji:"💜"},
+{name:"A.L.A",genre:"Rap",emoji:"🎵"},
+{name:"Blingos",genre:"Rap",emoji:"✨"},
+{name:"Sanfara",genre:"Rap",emoji:"🎙️"},
+{name:"Arabic Hits",genre:"Arabic",emoji:"🌙"},
+{name:"Chill Music",genre:"Chill",emoji:"☁️"}
 ];
 
-let favorites=JSON.parse(localStorage.getItem("musicFavorites")||"[]");
+let favorites=JSON.parse(localStorage.getItem("mvFavorites")||"[]");
 let category="All";
-let onlyFavorites=false;
 
 function render(){
-let q=document.getElementById("search").value.toLowerCase();
-let list=tracks.filter(t=>
-(category==="All"||t.category===category)&&
-(!onlyFavorites||favorites.includes(t.name))&&
-(t.name.toLowerCase().includes(q)||t.artist.toLowerCase().includes(q))
-);
-document.getElementById("heading").textContent=onlyFavorites?"❤️ Your Favorites":"🔥 Discover Music";
-document.getElementById("songs").innerHTML=list.map(t=>`
-<div class="song">
-<div class="cover">${t.emoji}</div>
-<h3>${t.name}</h3>
-<p>${t.artist} · ${t.category}</p>
+const q=document.getElementById("search").value.toLowerCase();
+
+const filtered=artists.filter(a=>{
+const matchCategory=
+category==="All"||
+category===a.genre||
+(category==="Favorites"&&favorites.includes(a.name));
+
+return matchCategory&&a.name.toLowerCase().includes(q);
+});
+
+document.getElementById("artists").innerHTML=
+filtered.map(a=>`
+<div class="artist">
+<div class="cover">${a.emoji}</div>
+<h3>${a.name}</h3>
+<p>${a.genre} Music</p>
 <div class="actions">
-<button onclick="playSong('${t.name}')">▶ Play</button>
-<button class="heart ${favorites.includes(t.name)?"active":""}" onclick="toggleFavorite('${t.name}')">${favorites.includes(t.name)?"♥":"♡"}</button>
+<button class="play" onclick="listen('${a.name}')">▶ Listen</button>
+<button class="fav ${favorites.includes(a.name)?"active":""}"
+onclick="toggleFavorite('${a.name}')">
+${favorites.includes(a.name)?"♥":"♡"}
+</button>
 </div>
-</div>`).join("")||"<p>No music found.</p>";
+</div>
+`).join("")||"<p>No results found.</p>";
 }
 
-function playSong(name){
-let t=tracks.find(x=>x.name===name);
-let a=document.getElementById("audio");
-document.getElementById("now").textContent="🎵 "+t.name;
-a.src=t.url;
-a.play();
-}
-function toggleFavorite(name){
-favorites=favorites.includes(name)?favorites.filter(x=>x!==name):[...favorites,name];
-localStorage.setItem("musicFavorites",JSON.stringify(favorites));
+function setCategory(c,button){
+category=c;
+document.querySelectorAll(".categories button").forEach(b=>b.classList.remove("active"));
+button.classList.add("active");
 render();
 }
-function setCategory(c){category=c;onlyFavorites=false;render();}
-function showFavorites(){onlyFavorites=true;render();}
-document.getElementById("audio").addEventListener("ended",()=>{
-let a=document.getElementById("audio");
-let current=tracks.findIndex(t=>t.name===document.getElementById("now").textContent.replace("🎵 ",""));
-let next=tracks[(current+1)%tracks.length];
-playSong(next.name);
-});
+
+function toggleFavorite(name){
+if(favorites.includes(name)){
+favorites=favorites.filter(x=>x!==name);
+}else{
+favorites.push(name);
+}
+localStorage.setItem("mvFavorites",JSON.stringify(favorites));
+render();
+}
+
+function listen(name){
+window.open("https://open.spotify.com/search/"+encodeURIComponent(name)," _blank");
+}
+
 render();
 </script>
+
 </body>
 </html>
