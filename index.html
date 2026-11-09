@@ -7,78 +7,129 @@
 <title>MUSIC VIBE</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#09090f;color:white;font-family:Arial,sans-serif}
-header{padding:25px 8%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #252535}
-.logo{font-size:27px;font-weight:bold;color:#b45cff}
+body{margin:0;background:#090810;color:white;font-family:Arial,sans-serif}
+header{padding:22px 7%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #292137}
+.logo{font-size:26px;font-weight:bold;color:#b75cff}
 .logo span{color:white}
-.hero{text-align:center;padding:65px 15px 35px}
-.hero h1{font-size:48px;margin:10px}
-.hero h1 span{color:#b45cff}
+header small{color:#aaa}
+.hero{text-align:center;padding:55px 15px 35px;background:radial-gradient(ellipse at top,#34164d,transparent 70%)}
+.hero h1{font-size:clamp(35px,7vw,65px);margin:10px}
+.hero h1 span{color:#bd65ff}
 .hero p{color:#aaa}
-.search{margin:25px auto;max-width:500px}
-input{width:100%;padding:16px;border-radius:30px;border:1px solid #7541a5;background:#171421;color:white;font-size:16px;outline:none}
-main{max-width:1000px;margin:auto;padding:20px}
-h2{color:#d5a4ff}
-.songs{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:18px}
-.song{background:#171421;padding:18px;border-radius:15px;border:1px solid #29213a}
-.cover{height:120px;border-radius:10px;background:linear-gradient(135deg,#37105f,#a34cff);display:grid;place-items:center;font-size:45px}
+.search{max-width:520px;margin:25px auto}
+input{width:100%;padding:16px 22px;border-radius:30px;background:#171421;border:1px solid #7541a5;color:white;font-size:16px;outline:none}
+main{max-width:1100px;margin:auto;padding:25px}
+nav{display:flex;gap:12px;flex-wrap:wrap;margin:20px 0 30px}
+nav button{background:#21172c;color:#ddd;border:1px solid #392449}
+button{cursor:pointer;border:0;border-radius:25px;padding:11px 17px;background:#a94cff;color:white}
+button:hover{filter:brightness(1.2)}
+.section-title{display:flex;justify-content:space-between;align-items:center}
+h2{font-size:22px}
+.songs{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:18px}
+.song{background:#171421;padding:14px;border:1px solid #30233d;border-radius:17px}
+.cover{height:145px;border-radius:12px;display:grid;place-items:center;font-size:55px;background:linear-gradient(135deg,#37105f,#b34cff)}
 .song h3{margin-bottom:5px}
-.song p{color:#aaa;font-size:13px}
-button{background:#a34cff;color:white;border:0;padding:11px 18px;border-radius:25px;cursor:pointer}
-footer{text-align:center;padding:30px;color:#777}
-#player{position:sticky;bottom:0;background:#171421;padding:15px;text-align:center;border-top:1px solid #7541a5}
+.song p{color:#999;font-size:13px;margin-top:5px}
+.actions{display:flex;justify-content:space-between;align-items:center;margin-top:15px}
+.heart{background:#292033;font-size:18px;padding:8px 12px}
+.heart.active{color:#ff5b9c}
+#player{position:sticky;bottom:0;background:#171421;border-top:1px solid #7541a5;padding:15px 5%;display:flex;justify-content:center;align-items:center;gap:15px;flex-wrap:wrap}
+#now{color:#d9b2ff}
+audio{width:min(420px,100%)}
+footer{text-align:center;padding:35px;color:#777}
 </style>
 </head>
 <body>
 <header>
 <div class="logo">MUSIC <span>VIBE</span></div>
-<div>🎧 YOUR MUSIC WORLD</div>
+<small>YOUR MUSIC WORLD 🎧</small>
 </header>
+
 <section class="hero">
 <h1>FEEL THE <span>MUSIC</span></h1>
-<p>Discover your vibe. Play your favorite music.</p>
+<p>Discover your sound. Live your vibe.</p>
 <div class="search">
-<input id="search" placeholder="🔍 Search music..." oninput="filterSongs()">
+<input id="search" placeholder="🔍 Search your music..." oninput="render()">
 </div>
 </section>
+
 <main>
-<h2>🔥 Discover Music</h2>
-<div class="songs" id="songs">
-<div class="song" data-name="chill vibes">
-<div class="cover">🌙</div>
-<h3>Chill Vibes</h3><p>Relax & Feel the Music</p>
-<button onclick="playSong('Chill Vibes','https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3')">▶ Play</button>
+<nav>
+<button onclick="setCategory('All')">All Music</button>
+<button onclick="setCategory('Chill')">Chill</button>
+<button onclick="setCategory('Rap')">Rap</button>
+<button onclick="setCategory('Arabic')">Arabic</button>
+<button onclick="showFavorites()">❤️ Favorites</button>
+</nav>
+
+<div class="section-title">
+<h2 id="heading">🔥 Discover Music</h2>
 </div>
-<div class="song" data-name="night music">
-<div class="cover">🌃</div>
-<h3>Night Music</h3><p>Music for the Night</p>
-<button onclick="playSong('Night Music','https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3')">▶ Play</button>
-</div>
-<div class="song" data-name="dream vibes">
-<div class="cover">✨</div>
-<h3>Dream Vibes</h3><p>Relax Your Mind</p>
-<button onclick="playSong('Dream Vibes','https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3')">▶ Play</button>
-</div>
-</div>
+<div class="songs" id="songs"></div>
 </main>
+
 <div id="player">
-<div id="now">Choose a song 🎵</div>
-<audio id="audio" controls style="width:90%;max-width:500px"></audio>
+<strong id="now">Choose a song 🎵</strong>
+<audio id="audio" controls></audio>
 </div>
-<footer>© 2026 MUSIC VIBE | Feel every beat ❤️</footer>
+
+<footer>© 2026 MUSIC VIBE · Made for music lovers ❤️</footer>
+
 <script>
-function playSong(name,url){
-document.getElementById('now').textContent='Playing: '+name;
-let a=document.getElementById('audio');
-a.src=url;
+const tracks=[
+{name:"Chill Vibes",artist:"SoundHelix",category:"Chill",emoji:"🌙",url:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"},
+{name:"Night Music",artist:"SoundHelix",category:"Chill",emoji:"🌃",url:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"},
+{name:"Dream Vibes",artist:"SoundHelix",category:"Chill",emoji:"✨",url:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"},
+{name:"Rap Energy",artist:"SoundHelix",category:"Rap",emoji:"🎤",url:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3"},
+{name:"Arabic Mood",artist:"SoundHelix",category:"Arabic",emoji:"🎶",url:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3"},
+{name:"Deep Feeling",artist:"SoundHelix",category:"Chill",emoji:"💜",url:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3"}
+];
+
+let favorites=JSON.parse(localStorage.getItem("musicFavorites")||"[]");
+let category="All";
+let onlyFavorites=false;
+
+function render(){
+let q=document.getElementById("search").value.toLowerCase();
+let list=tracks.filter(t=>
+(category==="All"||t.category===category)&&
+(!onlyFavorites||favorites.includes(t.name))&&
+(t.name.toLowerCase().includes(q)||t.artist.toLowerCase().includes(q))
+);
+document.getElementById("heading").textContent=onlyFavorites?"❤️ Your Favorites":"🔥 Discover Music";
+document.getElementById("songs").innerHTML=list.map(t=>`
+<div class="song">
+<div class="cover">${t.emoji}</div>
+<h3>${t.name}</h3>
+<p>${t.artist} · ${t.category}</p>
+<div class="actions">
+<button onclick="playSong('${t.name}')">▶ Play</button>
+<button class="heart ${favorites.includes(t.name)?"active":""}" onclick="toggleFavorite('${t.name}')">${favorites.includes(t.name)?"♥":"♡"}</button>
+</div>
+</div>`).join("")||"<p>No music found.</p>";
+}
+
+function playSong(name){
+let t=tracks.find(x=>x.name===name);
+let a=document.getElementById("audio");
+document.getElementById("now").textContent="🎵 "+t.name;
+a.src=t.url;
 a.play();
 }
-function filterSongs(){
-let q=document.getElementById('search').value.toLowerCase();
-document.querySelectorAll('.song').forEach(s=>{
-s.style.display=s.dataset.name.includes(q)?'block':'none';
-});
+function toggleFavorite(name){
+favorites=favorites.includes(name)?favorites.filter(x=>x!==name):[...favorites,name];
+localStorage.setItem("musicFavorites",JSON.stringify(favorites));
+render();
 }
+function setCategory(c){category=c;onlyFavorites=false;render();}
+function showFavorites(){onlyFavorites=true;render();}
+document.getElementById("audio").addEventListener("ended",()=>{
+let a=document.getElementById("audio");
+let current=tracks.findIndex(t=>t.name===document.getElementById("now").textContent.replace("🎵 ",""));
+let next=tracks[(current+1)%tracks.length];
+playSong(next.name);
+});
+render();
 </script>
 </body>
 </html>
