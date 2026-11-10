@@ -208,6 +208,17 @@ section{padding:40px 5%}
 .artist-cover:after{display:none}
 .artist-cover small{z-index:2;background:#09081188;padding:4px 7px;border-radius:5px;backdrop-filter:blur(5px)}
 
+
+/* One shared artist player */
+.unified-player-panel{max-width:760px;background:linear-gradient(145deg,#211431,#11101a);border:1px solid #65418a;border-radius:20px;padding:20px;box-shadow:0 16px 42px #0005}
+.unified-player-heading{display:flex;align-items:center;gap:13px;margin-bottom:15px}
+.unified-equalizer{width:48px;height:48px;display:grid;place-items:center;border-radius:14px;background:linear-gradient(135deg,#9333ea,#4c1d95);font-size:25px}
+.unified-player-heading strong,.unified-player-heading small{display:block}
+.unified-player-heading small{font-size:12px;color:#b6a8c5;margin-top:3px}
+.unified-player-panel iframe{height:190px;width:100%;border:0;border-radius:12px;background:#100e17}
+.unified-player-note{font-size:11px;color:#a99bb7;margin-top:12px}
+.artist-actions button[data-unified-player].selected{background:#6d28d9;outline:1px solid #c084fc}
+
 </style>
 </head>
 
@@ -253,11 +264,8 @@ section{padding:40px 5%}
 <div class="artist-cover"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Samara_rappeur.jpg/1280px-Samara_rappeur.jpg" alt="Samara portrait" loading="lazy" referrerpolicy="no-referrer"><small>TUNISIAN SPOTLIGHT</small></div>
 <h3>Samara</h3><p>Tunisian Rap</p>
 <div class="artist-actions">
-<button class="play-inline" type="button" data-player="samara">▶ Listen here</button>
+<button class="play-inline" type="button" data-unified-player="Samara" data-spotify-src="https://open.spotify.com/embed/track/3BzHDdvAdjvGxbQLi0VMBF?utm_source=generator">▶ Listen here</button>
 <button class="favorite" data-favorite="Samara">♥ Favorite</button>
-</div>
-<div class="artist-player" id="player-samara">
-<iframe src="https://open.spotify.com/embed/track/3BzHDdvAdjvGxbQLi0VMBF?utm_source=generator" title="Samara on Spotify" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
 </div>
 </article>
 
@@ -265,11 +273,8 @@ section{padding:40px 5%}
 <div class="artist-cover"><img src="https://webcms.billboardarabia.com/billboard/uploads/images/2026/04/10/2202511.webp" alt="Balti portrait" loading="lazy" referrerpolicy="no-referrer"><small>TUNISIAN SPOTLIGHT</small></div>
 <h3>Balti</h3><p>Tunisian Rap</p>
 <div class="artist-actions">
-<button class="play-inline" type="button" data-player="balti">▶ Listen here</button>
+<button class="play-inline" type="button" data-unified-player="Balti" data-spotify-src="https://open.spotify.com/embed/artist/1ARJNCZXJdkEXKSrXBKE2Q?utm_source=generator">▶ Listen here</button>
 <button class="favorite" data-favorite="Balti">♥ Favorite</button>
-</div>
-<div class="artist-player" id="player-balti">
-<iframe src="https://open.spotify.com/embed/artist/1ARJNCZXJdkEXKSrXBKE2Q?utm_source=generator" title="Balti on Spotify" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
 </div>
 </article>
 
@@ -277,11 +282,8 @@ section{padding:40px 5%}
 <div class="artist-cover"><img src="https://media2.giphy.com/avatars/klaybbj/cwaxZZQbQISa.png" alt="Klay BBJ portrait" loading="lazy" referrerpolicy="no-referrer"><small>TUNISIAN SPOTLIGHT</small></div>
 <h3>Klay BBJ</h3><p>Tunisian Rap</p>
 <div class="artist-actions">
-<button class="play-inline" type="button" data-player="klaybbj">▶ Listen here</button>
+<button class="play-inline" type="button" data-unified-player="Klay BBJ" data-spotify-src="https://open.spotify.com/embed/track/36bjz5JxUXNB4fnNxyrBa8?utm_source=generator">▶ Listen here</button>
 <button class="favorite" data-favorite="Klay BBJ">♥ Favorite</button>
-</div>
-<div class="artist-player" id="player-klaybbj">
-<iframe src="https://open.spotify.com/embed/track/36bjz5JxUXNB4fnNxyrBa8?utm_source=generator" title="Klay BBJ on Spotify" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
 </div>
 </article>
 
@@ -289,11 +291,8 @@ section{padding:40px 5%}
 <div class="artist-cover"><img src="https://ar.webmanagercenter.com/wp-content/uploads/2023/01/norod.jpg" alt="Nordo portrait" loading="lazy" referrerpolicy="no-referrer"><small>TUNISIAN SPOTLIGHT</small></div>
 <h3>Nordo</h3><p>Tunisian Rap</p>
 <div class="artist-actions">
-<button class="play-inline" type="button" data-player="nordo">▶ Listen here</button>
+<button class="play-inline" type="button" data-unified-player="Nordo" data-spotify-src="https://open.spotify.com/embed/track/7kyRQsWyOxHROs2GUqcDGH?utm_source=generator">▶ Listen here</button>
 <button class="favorite" data-favorite="Nordo">♥ Favorite</button>
-</div>
-<div class="artist-player" id="player-nordo">
-<iframe src="https://open.spotify.com/embed/track/7kyRQsWyOxHROs2GUqcDGH?utm_source=generator" title="Nordo on Spotify" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
 </div>
 </article>
 
@@ -301,11 +300,8 @@ section{padding:40px 5%}
 <div class="artist-cover"><img src="https://api.tunis.events/storage/7b4418cfce128ebea49914db6d93a809.jpg" alt="Kaso portrait" loading="lazy" referrerpolicy="no-referrer"><small>TUNISIAN SPOTLIGHT</small></div>
 <h3>Kaso</h3><p>Tunisian Rap</p>
 <div class="artist-actions">
-<button class="play-inline" type="button" data-player="kaso">▶ Listen here</button>
+<button class="play-inline" type="button" data-unified-player="Kaso" data-spotify-src="https://open.spotify.com/embed/track/5SXmbTghHaWfLJCAFBqX0a?utm_source=generator">▶ Listen here</button>
 <button class="favorite" data-favorite="Kaso">♥ Favorite</button>
-</div>
-<div class="artist-player" id="player-kaso">
-<iframe src="https://open.spotify.com/embed/track/5SXmbTghHaWfLJCAFBqX0a?utm_source=generator" title="Kaso on Spotify" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
 </div>
 </article>
 
@@ -313,11 +309,8 @@ section{padding:40px 5%}
 <div class="artist-cover"><img src="https://framerusercontent.com/images/aSxc27TviaCY3nsEQtBO02J31E.jpg" alt="A.L.A portrait" loading="lazy" referrerpolicy="no-referrer"><small>TUNISIAN SPOTLIGHT</small></div>
 <h3>A.L.A</h3><p>Tunisian Rap</p>
 <div class="artist-actions">
-<button class="play-inline" type="button" data-player="ala">▶ Listen here</button>
+<button class="play-inline" type="button" data-unified-player="A.L.A" data-spotify-src="https://open.spotify.com/embed/artist/3MKpGPhBp9KeXjGooKHNDX?utm_source=generator">▶ Listen here</button>
 <button class="favorite" data-favorite="A.L.A">♥ Favorite</button>
-</div>
-<div class="artist-player" id="player-ala">
-<iframe src="https://open.spotify.com/embed/artist/3MKpGPhBp9KeXjGooKHNDX?utm_source=generator" title="A.L.A on Spotify" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
 </div>
 </article>
 
@@ -325,11 +318,8 @@ section{padding:40px 5%}
 <div class="artist-cover"><img src="https://i.scdn.co/image/ab6761610000e5eb86ccc6a9b690ed539e456754" alt="Blingos portrait" loading="lazy" referrerpolicy="no-referrer"><small>TUNISIAN SPOTLIGHT</small></div>
 <h3>Blingos</h3><p>Tunisian Rap</p>
 <div class="artist-actions">
-<button class="play-inline" type="button" data-player="blingos">▶ Listen here</button>
+<button class="play-inline" type="button" data-unified-player="Blingos" data-spotify-src="https://open.spotify.com/embed/track/6xmh3i489fjX2Agp5goan5?utm_source=generator">▶ Listen here</button>
 <button class="favorite" data-favorite="Blingos">♥ Favorite</button>
-</div>
-<div class="artist-player" id="player-blingos">
-<iframe src="https://open.spotify.com/embed/track/6xmh3i489fjX2Agp5goan5?utm_source=generator" title="Blingos on Spotify" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
 </div>
 </article>
 
@@ -337,11 +327,8 @@ section{padding:40px 5%}
 <div class="artist-cover"><img src="https://alalam24.press.ma/static/uploads/2023/04/IMG-20230404-WA0014.jpg" alt="Sanfara portrait" loading="lazy" referrerpolicy="no-referrer"><small>TUNISIAN SPOTLIGHT</small></div>
 <h3>Sanfara</h3><p>Tunisian Rap</p>
 <div class="artist-actions">
-<button class="play-inline" type="button" data-player="sanfara">▶ Listen here</button>
+<button class="play-inline" type="button" data-unified-player="Sanfara" data-spotify-src="https://open.spotify.com/embed/track/31sqTVJHOLckTHJR9RfDXq?utm_source=generator">▶ Listen here</button>
 <button class="favorite" data-favorite="Sanfara">♥ Favorite</button>
-</div>
-<div class="artist-player" id="player-sanfara">
-<iframe src="https://open.spotify.com/embed/track/31sqTVJHOLckTHJR9RfDXq?utm_source=generator" title="Sanfara on Spotify" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
 </div>
 </article>
 
@@ -350,144 +337,108 @@ section{padding:40px 5%}
 <div class="artist-cover"><span>TS</span><small>GLOBAL SPOTLIGHT</small></div>
 <h3>Taylor Swift</h3><p>Pop</p>
 <div class="artist-actions">
-<button class="play-inline" type="button" data-player="taylorswift">▶ Listen here</button>
+<button class="play-inline" type="button" data-unified-player="Taylor Swift" data-spotify-src="https://open.spotify.com/embed/artist/06HL4z0CvFAxyc27GXpf02?utm_source=generator">▶ Listen here</button>
 <button class="favorite" data-favorite="Taylor Swift">♥ Favorite</button>
-</div><div class="artist-player" id="player-taylorswift">
-<iframe src="https://open.spotify.com/embed/artist/06HL4z0CvFAxyc27GXpf02?utm_source=generator" title="Taylor Swift on Spotify" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
-</div>
-</article>
+</div></article>
 
 
 <article class="artist-card" data-name="Bad Bunny" data-category="global">
 <div class="artist-cover"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Bad_Bunny.jpg" alt="Bad Bunny portrait" loading="lazy" referrerpolicy="no-referrer"><small>GLOBAL SPOTLIGHT</small></div>
 <h3>Bad Bunny</h3><p>Latin / Reggaeton</p>
 <div class="artist-actions">
-<button class="play-inline" type="button" data-player="badbunny">▶ Listen here</button>
+<button class="play-inline" type="button" data-unified-player="Bad Bunny" data-spotify-src="https://open.spotify.com/embed/artist/4q3ewBCX7sLwd24euuV69X?utm_source=generator">▶ Listen here</button>
 <button class="favorite" data-favorite="Bad Bunny">♥ Favorite</button>
-</div><div class="artist-player" id="player-badbunny">
-<iframe src="https://open.spotify.com/embed/artist/4q3ewBCX7sLwd24euuV69X?utm_source=generator" title="Bad Bunny on Spotify" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
-</div>
-</article>
+</div></article>
 
 
 <article class="artist-card" data-name="Drake" data-category="global">
 <div class="artist-cover"><span>D</span><small>GLOBAL SPOTLIGHT</small></div>
 <h3>Drake</h3><p>Hip-Hop / Rap</p>
 <div class="artist-actions">
-<button class="play-inline" type="button" data-player="drake">▶ Listen here</button>
+<button class="play-inline" type="button" data-unified-player="Drake" data-spotify-src="https://open.spotify.com/embed/artist/3TVXtAsR1Inumwj472S9r4?utm_source=generator">▶ Listen here</button>
 <button class="favorite" data-favorite="Drake">♥ Favorite</button>
-</div><div class="artist-player" id="player-drake">
-<iframe src="https://open.spotify.com/embed/artist/3TVXtAsR1Inumwj472S9r4?utm_source=generator" title="Drake on Spotify" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
-</div>
-</article>
+</div></article>
 
 
 <article class="artist-card" data-name="The Weeknd" data-category="global">
 <div class="artist-cover"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/The_Weeknd.jpg" alt="The Weeknd portrait" loading="lazy" referrerpolicy="no-referrer"><small>GLOBAL SPOTLIGHT</small></div>
 <h3>The Weeknd</h3><p>R&B / Pop</p>
 <div class="artist-actions">
-<button class="play-inline" type="button" data-player="theweeknd">▶ Listen here</button>
+<button class="play-inline" type="button" data-unified-player="The Weeknd" data-spotify-src="https://open.spotify.com/embed/artist/1Xyo4u8uXC1ZmMpatF05PJ?utm_source=generator">▶ Listen here</button>
 <button class="favorite" data-favorite="The Weeknd">♥ Favorite</button>
-</div><div class="artist-player" id="player-theweeknd">
-<iframe src="https://open.spotify.com/embed/artist/1Xyo4u8uXC1ZmMpatF05PJ?utm_source=generator" title="The Weeknd on Spotify" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
-</div>
-</article>
+</div></article>
 
 
 <article class="artist-card" data-name="Ariana Grande" data-category="global">
 <div class="artist-cover"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Ariana_Grande.jpg" alt="Ariana Grande portrait" loading="lazy" referrerpolicy="no-referrer"><small>GLOBAL SPOTLIGHT</small></div>
 <h3>Ariana Grande</h3><p>Pop / R&B</p>
 <div class="artist-actions">
-<button class="play-inline" type="button" data-player="arianagrande">▶ Listen here</button>
+<button class="play-inline" type="button" data-unified-player="Ariana Grande" data-spotify-src="https://open.spotify.com/embed/artist/66CXWjxzNUsdJxJ2JdwvnR?utm_source=generator">▶ Listen here</button>
 <button class="favorite" data-favorite="Ariana Grande">♥ Favorite</button>
-</div><div class="artist-player" id="player-arianagrande">
-<iframe src="https://open.spotify.com/embed/artist/66CXWjxzNUsdJxJ2JdwvnR?utm_source=generator" title="Ariana Grande on Spotify" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
-</div>
-</article>
+</div></article>
 
 
 <article class="artist-card" data-name="Ed Sheeran" data-category="global">
 <div class="artist-cover"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Ed_Sheeran.jpg" alt="Ed Sheeran portrait" loading="lazy" referrerpolicy="no-referrer"><small>GLOBAL SPOTLIGHT</small></div>
 <h3>Ed Sheeran</h3><p>Pop</p>
 <div class="artist-actions">
-<button class="play-inline" type="button" data-player="edsheeran">▶ Listen here</button>
+<button class="play-inline" type="button" data-unified-player="Ed Sheeran" data-spotify-src="https://open.spotify.com/embed/artist/6eUKZXaKkcviH0Ku9w2n3V?utm_source=generator">▶ Listen here</button>
 <button class="favorite" data-favorite="Ed Sheeran">♥ Favorite</button>
-</div><div class="artist-player" id="player-edsheeran">
-<iframe src="https://open.spotify.com/embed/artist/6eUKZXaKkcviH0Ku9w2n3V?utm_source=generator" title="Ed Sheeran on Spotify" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
-</div>
-</article>
+</div></article>
 
 
 <article class="artist-card" data-name="Justin Bieber" data-category="global">
 <div class="artist-cover"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Justin_Bieber.jpg" alt="Justin Bieber portrait" loading="lazy" referrerpolicy="no-referrer"><small>GLOBAL SPOTLIGHT</small></div>
 <h3>Justin Bieber</h3><p>Pop</p>
 <div class="artist-actions">
-<button class="play-inline" type="button" data-player="justinbieber">▶ Listen here</button>
+<button class="play-inline" type="button" data-unified-player="Justin Bieber" data-spotify-src="https://open.spotify.com/embed/artist/1uNFoZAHBGtllmzznpCI3s?utm_source=generator">▶ Listen here</button>
 <button class="favorite" data-favorite="Justin Bieber">♥ Favorite</button>
-</div><div class="artist-player" id="player-justinbieber">
-<iframe src="https://open.spotify.com/embed/artist/1uNFoZAHBGtllmzznpCI3s?utm_source=generator" title="Justin Bieber on Spotify" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
-</div>
-</article>
+</div></article>
 
 
 <article class="artist-card" data-name="Billie Eilish" data-category="global">
 <div class="artist-cover"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Billie_Eilish_portrait.jpg" alt="Billie Eilish portrait" loading="lazy" referrerpolicy="no-referrer"><small>GLOBAL SPOTLIGHT</small></div>
 <h3>Billie Eilish</h3><p>Alternative Pop</p>
 <div class="artist-actions">
-<button class="play-inline" type="button" data-player="billieeilish">▶ Listen here</button>
+<button class="play-inline" type="button" data-unified-player="Billie Eilish" data-spotify-src="https://open.spotify.com/embed/artist/6qqNVTkY8uBg9cP3Jd7DAH?utm_source=generator">▶ Listen here</button>
 <button class="favorite" data-favorite="Billie Eilish">♥ Favorite</button>
-</div><div class="artist-player" id="player-billieeilish">
-<iframe src="https://open.spotify.com/embed/artist/6qqNVTkY8uBg9cP3Jd7DAH?utm_source=generator" title="Billie Eilish on Spotify" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
-</div>
-</article>
+</div></article>
 
 
 <article class="artist-card" data-name="Eminem" data-category="global">
 <div class="artist-cover"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Eminem_%28cropped%29_%28full_portrait%29.jpg" alt="Eminem portrait" loading="lazy" referrerpolicy="no-referrer"><small>GLOBAL SPOTLIGHT</small></div>
 <h3>Eminem</h3><p>Hip-Hop / Rap</p>
 <div class="artist-actions">
-<button class="play-inline" type="button" data-player="eminem">▶ Listen here</button>
+<button class="play-inline" type="button" data-unified-player="Eminem" data-spotify-src="https://open.spotify.com/embed/artist/7dGJo4pcD2V6oG8kP0tJRR?utm_source=generator">▶ Listen here</button>
 <button class="favorite" data-favorite="Eminem">♥ Favorite</button>
-</div><div class="artist-player" id="player-eminem">
-<iframe src="https://open.spotify.com/embed/artist/7dGJo4pcD2V6oG8kP0tJRR?utm_source=generator" title="Eminem on Spotify" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
-</div>
-</article>
+</div></article>
 
 
 <article class="artist-card" data-name="BTS" data-category="global">
 <div class="artist-cover"><span>BTS</span><small>GLOBAL SPOTLIGHT</small></div>
 <h3>BTS</h3><p>K-Pop</p>
 <div class="artist-actions">
-<button class="play-inline" type="button" data-player="bts">▶ Listen here</button>
+<button class="play-inline" type="button" data-unified-player="BTS" data-spotify-src="https://open.spotify.com/embed/artist/3Nrfpe0tUJi4K4DXYWgMUX?utm_source=generator">▶ Listen here</button>
 <button class="favorite" data-favorite="BTS">♥ Favorite</button>
-</div><div class="artist-player" id="player-bts">
-<iframe src="https://open.spotify.com/embed/artist/3Nrfpe0tUJi4K4DXYWgMUX?utm_source=generator" title="BTS on Spotify" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
-</div>
-</article>
+</div></article>
 
 
 <article class="artist-card" data-name="Bruno Mars" data-category="global">
 <div class="artist-cover"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Bruno_Mars.jpg" alt="Bruno Mars portrait" loading="lazy" referrerpolicy="no-referrer"><small>GLOBAL SPOTLIGHT</small></div>
 <h3>Bruno Mars</h3><p>Pop / R&B</p>
 <div class="artist-actions">
-<button class="play-inline" type="button" data-player="brunomars">▶ Listen here</button>
+<button class="play-inline" type="button" data-unified-player="Bruno Mars" data-spotify-src="https://open.spotify.com/embed/artist/0du5cEVh5yTK9QJze8zA0C?utm_source=generator">▶ Listen here</button>
 <button class="favorite" data-favorite="Bruno Mars">♥ Favorite</button>
-</div><div class="artist-player" id="player-brunomars">
-<iframe src="https://open.spotify.com/embed/artist/0du5cEVh5yTK9QJze8zA0C?utm_source=generator" title="Bruno Mars on Spotify" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
-</div>
-</article>
+</div></article>
 
 
 <article class="artist-card" data-name="Rihanna" data-category="global">
 <div class="artist-cover"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Rihanna_face.png" alt="Rihanna portrait" loading="lazy" referrerpolicy="no-referrer"><small>GLOBAL SPOTLIGHT</small></div>
 <h3>Rihanna</h3><p>Pop / R&B</p>
 <div class="artist-actions">
-<button class="play-inline" type="button" data-player="rihanna">▶ Listen here</button>
+<button class="play-inline" type="button" data-unified-player="Rihanna" data-spotify-src="https://open.spotify.com/embed/artist/5pKCCKE2ajJHZ9KAiaK11H?utm_source=generator">▶ Listen here</button>
 <button class="favorite" data-favorite="Rihanna">♥ Favorite</button>
-</div><div class="artist-player" id="player-rihanna">
-<iframe src="https://open.spotify.com/embed/artist/5pKCCKE2ajJHZ9KAiaK11H?utm_source=generator" title="Rihanna on Spotify" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
-</div>
-</article>
+</div></article>
 
 <article class="artist-card" data-name="Arabic Hits" data-category="arabic">
 <div class="artist-cover"><span>AR</span><small>ARABIC SELECTION</small></div>
@@ -509,6 +460,17 @@ section{padding:40px 5%}
 <p class="empty" id="empty">No artists found.</p>
 </section>
 
+
+
+<section id="unified-player">
+<h2 class="section-title">MUSIC VIBE Player</h2>
+<p class="section-sub">Choose an artist above. Listen and control playback in one place.</p>
+<div class="unified-player-panel">
+<div class="unified-player-heading"><span class="unified-equalizer">♫</span><div><strong id="unifiedPlayerTitle">Your music is waiting</strong><small id="unifiedPlayerSubtitle">Choose any artist and tap Listen here</small></div></div>
+<iframe id="unifiedSpotifyFrame" title="MUSIC VIBE Spotify player" src="https://open.spotify.com/embed/artist/1ARJNCZXJdkEXKSrXBKE2Q?utm_source=generator" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+<p class="unified-player-note">Playback, pause, track selection and volume are controlled inside the Spotify player. Some features may require a Spotify account.</p>
+</div>
+</section>
 
 <section id="radio">
 <h2 class="section-title">MUSIC VIBE Radio</h2>
@@ -672,16 +634,22 @@ emptyMessage.style.display = visibleCount ? "none" : "block";
 
 searchInput.addEventListener("input", displayArtists);
 
-document.querySelectorAll("[data-player]").forEach(button=>{
+document.querySelectorAll("[data-unified-player]").forEach(button=>{
 button.addEventListener("click",()=>{
-const player = document.getElementById("player-" + button.dataset.player);
-const wasOpen = player.classList.contains("open");
-document.querySelectorAll(".artist-player").forEach(item=>item.classList.remove("open"));
-document.querySelectorAll("[data-player]").forEach(item=>item.textContent="▶ Listen here");
-if(!wasOpen){
-player.classList.add("open");
-button.textContent="▲ Hide player";
-}
+const frame=document.getElementById("unifiedSpotifyFrame");
+const title=document.getElementById("unifiedPlayerTitle");
+const subtitle=document.getElementById("unifiedPlayerSubtitle");
+const artist=button.dataset.unifiedPlayer;
+const src=button.dataset.spotifySrc;
+if(!frame || !src) return;
+frame.src=src;
+title.textContent=artist;
+subtitle.textContent="Now selected on MUSIC VIBE";
+document.querySelectorAll("[data-unified-player]").forEach(item=>{
+item.classList.toggle("selected",item===button);
+item.textContent=item===button ? "✓ Selected" : "▶ Listen here";
+});
+document.getElementById("unified-player").scrollIntoView({behavior:"smooth",block:"center"});
 });
 });
 
