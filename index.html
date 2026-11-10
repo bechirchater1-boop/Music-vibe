@@ -1148,7 +1148,7 @@ function openArtistSongs(artistName){
     const wantedArtist = artistName.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().trim();
     const results = rawResults.filter(track=>{
       const returnedArtist = (track.artistName || "").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
-      return returnedArtist.split(/\\s*(?:,|&|feat\\.?|ft\\.?|x|×)\\s*/).some(name=>name.trim()===wantedArtist) || returnedArtist===wantedArtist;
+      return returnedArtist.split(/\s*(?:,|&|feat\.?|ft\.?|x|×)\s*/).some(name=>name.trim()===wantedArtist) || returnedArtist===wantedArtist;
     }).slice(0,12);
     if(!results.length){artistSongsStatus.textContent="No verified matching tracks found in the Tunisia Apple Music catalog right now. We hid unrelated results." ;return;}
     artistSongsStatus.textContent = "Showing " + results.length + " matching tracks · tap play for a preview";
