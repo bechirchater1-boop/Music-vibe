@@ -1021,6 +1021,31 @@ loading="lazy">
 </section>
 </main>
 
+
+<section id="community-videos">
+ <h2 class="section-title">Latest Videos</h2>
+ <p class="section-sub">Fresh video links selected by MUSIC VIBE.</p>
+ <div id="communityVideoGrid" class="news-grid"><p class="muted">Loading videos...</p></div>
+</section>
+<script>
+(async function loadCommunityVideos(){
+ const grid=document.getElementById("communityVideoGrid"); if(!grid)return;
+ try{
+  const response=await fetch("/api/videos"); if(!response.ok)throw new Error("Videos unavailable");
+  const data=await response.json(); const videos=Array.isArray(data.videos)?data.videos:[];
+  grid.replaceChildren();
+  if(!videos.length){grid.textContent="New videos will appear here soon.";return;}
+  videos.forEach(video=>{
+   const card=document.createElement("article");card.className="news-card";
+   const tag=document.createElement("span");tag.className="news-tag";tag.textContent=video.category||"Music";
+   const title=document.createElement("h3");title.textContent=video.title||"Music video";
+   const link=document.createElement("a");link.className="news-link";link.href=video.url;link.target="_blank";link.rel="noopener noreferrer";link.textContent="Watch video ↗";
+   card.append(tag,title,link);grid.append(card);
+  });
+ }catch(error){grid.textContent="Video list is temporarily unavailable.";}
+})();
+</script>
+
 <footer>
 <p>© 2026 MUSIC VIBE. All rights reserved.</p>
 <p style="margin-top:10px">
