@@ -1240,7 +1240,7 @@ function openArtistSongs(artistName){
       open.textContent = "Open exact song ↗";
       row.append(cover,info,play,open); artistSongList.append(row);
     });
-    return;
+    // Keep the existing Apple/iTunes catalog list available below the official YouTube player.
   }
   const url = "https://itunes.apple.com/search?term=" + encodeURIComponent(artistName) + "&entity=song&attribute=artistTerm&limit=50&country=TN";
   fetch(url).then(response=>{
