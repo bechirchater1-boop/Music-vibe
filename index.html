@@ -218,7 +218,14 @@ section{padding:40px 5%}
 .artist-actions a,.artist-actions button{flex:1;text-align:center}
 .artist-actions .favorite{flex:0 0 auto}
 .artist-player iframe{height:152px}
-@media(max-width:600px){.artist-cover{height:105px}.artist-card{padding:12px}}
+@media(max-width:600px){
+.artist-cover{height:105px}
+.artist-card{padding:12px}
+#artists .filters{flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;padding:2px 2px 10px;margin-right:-5%;margin-left:-5%;padding-left:5%;padding-right:5%;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+#artists .filters::-webkit-scrollbar{display:none}
+#artists .filter{flex:0 0 auto;white-space:nowrap;scroll-snap-align:start}
+#artists .search-box{max-width:none}
+}
 
 
 /* Real artist portraits */
