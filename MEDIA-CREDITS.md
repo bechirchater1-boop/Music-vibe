@@ -33,7 +33,8 @@ The remaining international portraits have credit/source links in the Internatio
 
 ## Radio audio
 
-- Tracks 1–14 are embedded from Nullrights. Nullrights states that its catalog is dedicated to CC0 1.0. Verify each selected recording's own source page and retain a copy/screenshot of its license evidence.
+- Tracks 1 and 5–14 have individual Nullrights pages displaying CC0 1.0 at review time. Track pages: https://nullrights.com/track/g0enboi9vv, https://nullrights.com/track/o6ugnso1yu, https://nullrights.com/track/5pk2gg7y1v, https://nullrights.com/track/44gronsmn9, https://nullrights.com/track/rzvijlfi2e, https://nullrights.com/track/blp309o6nf, https://nullrights.com/track/6bazoqwvtt, https://nullrights.com/track/eotcfr6107, https://nullrights.com/track/mrsi4oguht, https://nullrights.com/track/5gcryw5w8m, and https://nullrights.com/track/bzditqj2dq.
+- Tracks 2–4 (FL Version of October Jazz, Fevered Dream, Aliens) are embedded from Nullrights but their individual license pages were not confirmed during this review. Treat their license status as unverified until checked.
 - Track 15, “Atlas • Tunisia” by Vadim_Makes_Sound, links to Pixabay: https://pixabay.com/music/world-atlas-tunisia-595084/
 - Pixabay's Content License permits many commercial uses but prohibits selling or distributing the content on a standalone basis. The current site links to the original track page rather than offering a downloadable audio file.
 
