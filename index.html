@@ -1075,15 +1075,20 @@ function openArtistSongs(artistName){
   artistSongList.replaceChildren();
   artistSongsPanel.classList.add("open");
   artistSongsPanel.scrollIntoView({behavior:"smooth",block:"start"});
-  const url = "https://itunes.apple.com/search?term=" + encodeURIComponent(artistName) + "&entity=song&attribute=artistTerm&limit=12&country=US";
+  const url = "https://itunes.apple.com/search?term=" + encodeURIComponent(artistName) + "&entity=song&attribute=artistTerm&limit=50&country=TN";
   fetch(url).then(response=>{
     if(!response.ok) throw new Error("Song search unavailable");
     return response.json();
   }).then(data=>{
     if(requestId !== artistSongsRequest) return;
-    const results = Array.isArray(data.results) ? data.results : [];
-    if(!results.length){artistSongsStatus.textContent="No tracks found for this artist right now.";return;}
-    artistSongsStatus.textContent = "Showing " + results.length + " songs · tap play for a preview";
+    const rawResults = Array.isArray(data.results) ? data.results : [];
+    const wantedArtist = artistName.normalize("NFD").replace(/[\\u0300-\\u036f]/g,"").toLowerCase().trim();
+    const results = rawResults.filter(track=>{
+      const returnedArtist = (track.artistName || "").normalize("NFD").replace(/[\\u0300-\\u036f]/g,"").toLowerCase();
+      return returnedArtist.split(/\\s*(?:,|&|feat\\.?|ft\\.?|x|×)\\s*/).some(name=>name.trim()===wantedArtist) || returnedArtist===wantedArtist;
+    }).slice(0,12);
+    if(!results.length){artistSongsStatus.textContent="No verified matching tracks found in the Tunisia Apple Music catalog right now. We hid unrelated results." ;return;}
+    artistSongsStatus.textContent = "Showing " + results.length + " matching tracks · tap play for a preview";
     results.forEach(track=>{
       const row=document.createElement("div"); row.className="artist-song";
       const cover=document.createElement("img"); cover.src=track.artworkUrl100 || ""; cover.alt=""; cover.loading="lazy";
