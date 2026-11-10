@@ -219,6 +219,8 @@ section{padding:40px 5%}
 .unified-player-note{font-size:11px;color:#a99bb7;margin-top:12px}
 .artist-actions button[data-unified-player].selected{background:#6d28d9;outline:1px solid #c084fc}
 
+
+.artist-image-fallback{position:absolute;inset:0;display:grid;place-items:center;font-size:38px;font-weight:900;letter-spacing:2px;color:#fff;background:radial-gradient(circle at 70% 20%,#a855f766,transparent 32%),linear-gradient(135deg,#42205f,#171222 65%,#0c0b12);text-shadow:0 5px 24px #0009}
 </style>
 </head>
 
@@ -603,7 +605,13 @@ const filters = [...document.querySelectorAll(".filter")];
 const emptyMessage = document.getElementById("empty");
 
 let currentFilter = "all";
-let favorites = JSON.parse(localStorage.getItem("musicVibeFavorites") || "[]");
+let favorites = [];
+try {
+  const savedFavorites = JSON.parse(localStorage.getItem("musicVibeFavorites") || "[]");
+  favorites = Array.isArray(savedFavorites) ? savedFavorites.filter(item => typeof item === "string") : [];
+} catch (error) {
+  favorites = [];
+}
 
 function updateFavoriteButtons(){
 document.querySelectorAll("[data-favorite]").forEach(button=>{
@@ -619,11 +627,10 @@ const query = searchInput.value.toLowerCase().trim();
 let visibleCount = 0;
 
 cards.forEach(card=>{
-const name = card.dataset.name.toLowerCase();
 const category = card.dataset.category;
 const isFavorite = favorites.includes(card.dataset.name);
 
-const matchesSearch = name.includes(query);
+const matchesSearch = card.textContent.toLowerCase().includes(query);
 const matchesFilter =
 currentFilter === "all" ||
 category === currentFilter ||
@@ -678,6 +685,21 @@ favorites.push(name);
 }
 
 localStorage.setItem("musicVibeFavorites", JSON.stringify(favorites));
+// Show a clean initials fallback if an artist portrait URL is unavailable.
+document.querySelectorAll(".artist-cover img").forEach(img => {
+  img.addEventListener("error", () => {
+    const card = img.closest(".artist-card");
+    const cover = img.closest(".artist-cover");
+    if (!card || !cover || cover.querySelector(".artist-image-fallback")) return;
+    img.style.display = "none";
+    const initials = card.dataset.name.split(/\\s+/).map(part => part[0]).join("").slice(0, 3).toUpperCase();
+    const fallback = document.createElement("span");
+    fallback.className = "artist-image-fallback";
+    fallback.textContent = initials;
+    cover.appendChild(fallback);
+  }, { once: true });
+});
+
 updateFavoriteButtons();
 displayArtists();
 });
