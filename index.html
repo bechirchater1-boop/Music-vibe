@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#090811">
-<meta name="description" content="Discover Tunisian rap, Arabic music, artist profiles, music guides and new sounds with MUSIC VIBE.">
+<meta name="description" content="Discover Tunisian rap, Arabic music, and international artists on MUSIC VIBE. Explore music from around the world.">
 <meta name="google-site-verification" content="8o0RAgg5fT0uXOgthV9aRfXids5gpw9qRdrUhUJOVSA">
 <meta property="og:title" content="MUSIC VIBE | Discover Your Sound">
 <meta property="og:description" content="Discover Tunisian rap and Arabic music.">
@@ -202,11 +202,11 @@ section{padding:40px 5%}
 
 /* Real artist portraits */
 .artist-cover{isolation:isolate;background:#171222}
-.artist-cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 28%;z-index:-1;transition:transform .35s ease;filter:saturate(.92)}
+.artist-cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 28%;z-index:0;transition:transform .35s ease;filter:saturate(.92)}
 .artist-card:hover .artist-cover img{transform:scale(1.06)}
-.artist-cover:before{z-index:0;background:linear-gradient(0deg,#090811d9 0%,transparent 72%);width:100%;height:100%;border:0;border-radius:0}
+.artist-cover:before{z-index:1;background:linear-gradient(0deg,#090811d9 0%,transparent 72%);width:100%;height:100%;border:0;border-radius:0}
 .artist-cover:after{display:none}
-.artist-cover small{z-index:1;background:#09081188;padding:4px 7px;border-radius:5px;backdrop-filter:blur(5px)}
+.artist-cover small{z-index:2;background:#09081188;padding:4px 7px;border-radius:5px;backdrop-filter:blur(5px)}
 
 </style>
 </head>
@@ -243,6 +243,7 @@ section{padding:40px 5%}
 <button class="filter" data-filter="rap">Tunisian Rap</button>
 <button class="filter" data-filter="arabic">Arabic</button>
 <button class="filter" data-filter="chill">Chill</button>
+<button class="filter" data-filter="global">International</button>
 <button class="filter" data-filter="favorites">Favorites ♥</button>
 </div>
 
@@ -343,6 +344,114 @@ section{padding:40px 5%}
 <iframe src="https://open.spotify.com/embed/track/31sqTVJHOLckTHJR9RfDXq?utm_source=generator" title="Sanfara on Spotify" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
 </div>
 </article>
+
+
+<article class="artist-card" data-name="Taylor Swift" data-category="global">
+<div class="artist-cover"><span>TS</span><small>GLOBAL SPOTLIGHT</small></div>
+<h3>Taylor Swift</h3><p>Pop</p>
+<div class="artist-actions">
+<a class="spotify" target="_blank" rel="noopener" href="https://open.spotify.com/search/Taylor%20Swift">Listen on Spotify</a>
+<button class="favorite" data-favorite="Taylor Swift">♥ Favorite</button>
+</div></article>
+
+
+<article class="artist-card" data-name="Bad Bunny" data-category="global">
+<div class="artist-cover"><span>BB</span><small>GLOBAL SPOTLIGHT</small></div>
+<h3>Bad Bunny</h3><p>Latin / Reggaeton</p>
+<div class="artist-actions">
+<a class="spotify" target="_blank" rel="noopener" href="https://open.spotify.com/search/Bad%20Bunny">Listen on Spotify</a>
+<button class="favorite" data-favorite="Bad Bunny">♥ Favorite</button>
+</div></article>
+
+
+<article class="artist-card" data-name="Drake" data-category="global">
+<div class="artist-cover"><span>D</span><small>GLOBAL SPOTLIGHT</small></div>
+<h3>Drake</h3><p>Hip-Hop / Rap</p>
+<div class="artist-actions">
+<a class="spotify" target="_blank" rel="noopener" href="https://open.spotify.com/search/Drake">Listen on Spotify</a>
+<button class="favorite" data-favorite="Drake">♥ Favorite</button>
+</div></article>
+
+
+<article class="artist-card" data-name="The Weeknd" data-category="global">
+<div class="artist-cover"><span>W</span><small>GLOBAL SPOTLIGHT</small></div>
+<h3>The Weeknd</h3><p>R&B / Pop</p>
+<div class="artist-actions">
+<a class="spotify" target="_blank" rel="noopener" href="https://open.spotify.com/search/The%20Weeknd">Listen on Spotify</a>
+<button class="favorite" data-favorite="The Weeknd">♥ Favorite</button>
+</div></article>
+
+
+<article class="artist-card" data-name="Ariana Grande" data-category="global">
+<div class="artist-cover"><span>AG</span><small>GLOBAL SPOTLIGHT</small></div>
+<h3>Ariana Grande</h3><p>Pop / R&B</p>
+<div class="artist-actions">
+<a class="spotify" target="_blank" rel="noopener" href="https://open.spotify.com/search/Ariana%20Grande">Listen on Spotify</a>
+<button class="favorite" data-favorite="Ariana Grande">♥ Favorite</button>
+</div></article>
+
+
+<article class="artist-card" data-name="Ed Sheeran" data-category="global">
+<div class="artist-cover"><span>ES</span><small>GLOBAL SPOTLIGHT</small></div>
+<h3>Ed Sheeran</h3><p>Pop</p>
+<div class="artist-actions">
+<a class="spotify" target="_blank" rel="noopener" href="https://open.spotify.com/search/Ed%20Sheeran">Listen on Spotify</a>
+<button class="favorite" data-favorite="Ed Sheeran">♥ Favorite</button>
+</div></article>
+
+
+<article class="artist-card" data-name="Justin Bieber" data-category="global">
+<div class="artist-cover"><span>JB</span><small>GLOBAL SPOTLIGHT</small></div>
+<h3>Justin Bieber</h3><p>Pop</p>
+<div class="artist-actions">
+<a class="spotify" target="_blank" rel="noopener" href="https://open.spotify.com/search/Justin%20Bieber">Listen on Spotify</a>
+<button class="favorite" data-favorite="Justin Bieber">♥ Favorite</button>
+</div></article>
+
+
+<article class="artist-card" data-name="Billie Eilish" data-category="global">
+<div class="artist-cover"><span>BE</span><small>GLOBAL SPOTLIGHT</small></div>
+<h3>Billie Eilish</h3><p>Alternative Pop</p>
+<div class="artist-actions">
+<a class="spotify" target="_blank" rel="noopener" href="https://open.spotify.com/search/Billie%20Eilish">Listen on Spotify</a>
+<button class="favorite" data-favorite="Billie Eilish">♥ Favorite</button>
+</div></article>
+
+
+<article class="artist-card" data-name="Eminem" data-category="global">
+<div class="artist-cover"><span>E</span><small>GLOBAL SPOTLIGHT</small></div>
+<h3>Eminem</h3><p>Hip-Hop / Rap</p>
+<div class="artist-actions">
+<a class="spotify" target="_blank" rel="noopener" href="https://open.spotify.com/search/Eminem">Listen on Spotify</a>
+<button class="favorite" data-favorite="Eminem">♥ Favorite</button>
+</div></article>
+
+
+<article class="artist-card" data-name="BTS" data-category="global">
+<div class="artist-cover"><span>BTS</span><small>GLOBAL SPOTLIGHT</small></div>
+<h3>BTS</h3><p>K-Pop</p>
+<div class="artist-actions">
+<a class="spotify" target="_blank" rel="noopener" href="https://open.spotify.com/search/BTS">Listen on Spotify</a>
+<button class="favorite" data-favorite="BTS">♥ Favorite</button>
+</div></article>
+
+
+<article class="artist-card" data-name="Bruno Mars" data-category="global">
+<div class="artist-cover"><span>BM</span><small>GLOBAL SPOTLIGHT</small></div>
+<h3>Bruno Mars</h3><p>Pop / R&B</p>
+<div class="artist-actions">
+<a class="spotify" target="_blank" rel="noopener" href="https://open.spotify.com/search/Bruno%20Mars">Listen on Spotify</a>
+<button class="favorite" data-favorite="Bruno Mars">♥ Favorite</button>
+</div></article>
+
+
+<article class="artist-card" data-name="Rihanna" data-category="global">
+<div class="artist-cover"><span>R</span><small>GLOBAL SPOTLIGHT</small></div>
+<h3>Rihanna</h3><p>Pop / R&B</p>
+<div class="artist-actions">
+<a class="spotify" target="_blank" rel="noopener" href="https://open.spotify.com/search/Rihanna">Listen on Spotify</a>
+<button class="favorite" data-favorite="Rihanna">♥ Favorite</button>
+</div></article>
 
 <article class="artist-card" data-name="Arabic Hits" data-category="arabic">
 <div class="artist-cover"><span>AR</span><small>ARABIC SELECTION</small></div>
