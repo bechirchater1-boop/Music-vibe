@@ -124,6 +124,28 @@ nav{justify-content:center}
 .hero{padding-top:60px}
 section{padding:40px 5%}
 }
+
+/* MUSIC VIBE CC0 radio */
+.radio-layout{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(260px,.85fr);gap:20px;align-items:start}
+.radio-main{background:linear-gradient(145deg,#211431,#11101a);border:1px solid #553477;border-radius:20px;padding:22px;box-shadow:0 18px 55px #0006}
+.radio-kicker{color:#c084fc;font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase}
+.radio-main h3{font-size:25px;margin:5px 0 2px}
+.radio-main .radio-artist{color:#aaa;font-size:13px;margin-bottom:16px}
+.radio-embed{width:100%;height:120px;border:0;border-radius:12px;background:#fff}
+.radio-controls{display:flex;gap:10px;align-items:center;margin-top:15px}
+.radio-controls button{border:1px solid #62427e;background:#261936;color:#fff;border-radius:12px;padding:11px 16px;cursor:pointer;font-weight:700}
+.radio-controls button.primary{background:#9333ea;border-color:#9333ea;flex:1}
+.radio-license{font-size:11px;color:#9f91ac;margin-top:12px}
+.radio-list{background:#15121e;border:1px solid #30263c;border-radius:18px;padding:15px;max-height:420px;overflow:auto}
+.radio-list h3{font-size:16px;margin:2px 5px 10px}
+.radio-track{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:transparent;border:0;border-radius:10px;color:#ddd;padding:10px;cursor:pointer}
+.radio-track:hover,.radio-track.active{background:#30203f}
+.radio-track .track-num{color:#a855f7;font-size:12px;font-weight:800;width:20px}
+.radio-track strong{display:block;font-size:13px}
+.radio-track small{display:block;color:#999;font-size:11px}
+.radio-track.active strong{color:#d8b4fe}
+@media(max-width:720px){.radio-layout{grid-template-columns:1fr}.radio-list{max-height:300px}.radio-main{padding:16px}}
+
 </style>
 </head>
 
@@ -133,6 +155,7 @@ section{padding:40px 5%}
 <a class="logo" href="#">MUSIC <span>VIBE</span></a>
 <nav>
 <a href="#artists">Artists</a>
+<a href="#radio">Vibe Radio</a>
 <a href="#playlist">Playlist</a>
 <a href="#guides">Guides</a>
 <a href="#about">About</a>
@@ -267,6 +290,40 @@ section{padding:40px 5%}
 
 </div>
 <p class="empty" id="empty">No artists found.</p>
+</section>
+
+
+<section id="radio">
+<h2 class="section-title">MUSIC VIBE Radio</h2>
+<p class="section-sub">A hand-picked mix of independent electronic, pop, jazz and chill sounds. Every track below is marked CC0 / public domain.</p>
+<div class="radio-layout">
+  <div class="radio-main">
+    <div class="radio-kicker">Now selected · Free music</div>
+    <h3 id="radioTitle">Klatch</h3>
+    <p class="radio-artist" id="radioArtist">CXR ATK · Electronic</p>
+    <iframe class="radio-embed" id="radioEmbed" src="https://nullrights.com/embed/g0enboi9vv" title="MUSIC VIBE CC0 music player" loading="lazy" allow="autoplay"></iframe>
+    <div class="radio-controls">
+      <button type="button" id="radioPrev" aria-label="Previous track">◀ Prev</button>
+      <button type="button" class="primary" id="radioNext">Next track ▶</button>
+    </div>
+    <p class="radio-license">CC0 1.0 · Free for personal and commercial use. Playback controls are provided by the track's embedded player.</p>
+  </div>
+  <div class="radio-list" id="radioList">
+    <h3>Playlist · 11 tracks</h3>
+    <button class="radio-track active" type="button" data-track="0"><span class="track-num">01</span><span><strong>Klatch</strong><small>CXR ATK · Electronic · 2:57</small></span></button>
+    <button class="radio-track" type="button" data-track="1"><span class="track-num">02</span><span><strong>FL Version of October Jazz</strong><small>Pro Sensory · Jazz</small></span></button>
+    <button class="radio-track" type="button" data-track="2"><span class="track-num">03</span><span><strong>Fevered Dream</strong><small>Tsorthan Grove · Ambient</small></span></button>
+    <button class="radio-track" type="button" data-track="3"><span class="track-num">04</span><span><strong>Aliens</strong><small>oglsdl · Electronic</small></span></button>
+    <button class="radio-track" type="button" data-track="4"><span class="track-num">05</span><span><strong>Blossom Mountain BPM 140</strong><small>MintoDog · Game / Electronic</small></span></button>
+    <button class="radio-track" type="button" data-track="5"><span class="track-num">06</span><span><strong>Darkness Road BPM 165</strong><small>MintoDog · Synth / Electronic</small></span></button>
+    <button class="radio-track" type="button" data-track="6"><span class="track-num">07</span><span><strong>+82KOREA</strong><small>Superrichmimi · Pop · 1:10</small></span></button>
+    <button class="radio-track" type="button" data-track="7"><span class="track-num">08</span><span><strong>Aashayein</strong><small>Superrichmimi · Pop · 2:16</small></span></button>
+    <button class="radio-track" type="button" data-track="8"><span class="track-num">09</span><span><strong>Alarm from a Beauty</strong><small>Superrichmimi · Pop · 1:27</small></span></button>
+    <button class="radio-track" type="button" data-track="9"><span class="track-num">10</span><span><strong>Fine Dining BGM</strong><small>Lao Ban · Jazz · 2:37</small></span></button>
+    <button class="radio-track" type="button" data-track="10"><span class="track-num">11</span><span><strong>Just Do!</strong><small>Lao Ban · Pop · 3:10</small></span></button>
+    <p style="font-size:11px;color:#8f829b;margin:10px 5px 2px">Music courtesy of <a href="https://nullrights.com/" target="_blank" rel="noopener" style="color:#c084fc">nullrights</a>. Track pages show the CC0 license.</p>
+  </div>
+</div>
 </section>
 
 <section id="playlist">
@@ -422,6 +479,37 @@ updateFavoriteButtons();
 displayArtists();
 });
 });
+
+
+const radioTracks = [
+  {title:"Klatch",artist:"CXR ATK · Electronic",id:"g0enboi9vv"},
+  {title:"FL Version of October Jazz",artist:"Pro Sensory · Jazz",id:"omsbc6sp8x"},
+  {title:"Fevered Dream",artist:"Tsorthan Grove · Ambient",id:"uae5h00ab7"},
+  {title:"Aliens",artist:"oglsdl · Electronic",id:"w6p8r92ozi"},
+  {title:"Blossom Mountain BPM 140",artist:"MintoDog · Game / Electronic",id:"o6ugnso1yu"},
+  {title:"Darkness Road BPM 165",artist:"MintoDog · Synth / Electronic",id:"5pk2gg7y1v"},
+  {title:"+82KOREA",artist:"Superrichmimi · Pop",id:"44gronsmn9"},
+  {title:"Aashayein",artist:"Superrichmimi · Pop",id:"rzvijlfi2e"},
+  {title:"Alarm from a Beauty",artist:"Superrichmimi · Pop",id:"blp309o6nf"},
+  {title:"Fine Dining BGM",artist:"Lao Ban · Jazz",id:"6bazoqwvtt"},
+  {title:"Just Do!",artist:"Lao Ban · Pop",id:"eotcfr6107"}
+];
+let radioIndex = 0;
+function selectRadioTrack(index){
+  radioIndex = (index + radioTracks.length) % radioTracks.length;
+  const track = radioTracks[radioIndex];
+  document.getElementById("radioTitle").textContent = track.title;
+  document.getElementById("radioArtist").textContent = track.artist;
+  document.getElementById("radioEmbed").src = "https://nullrights.com/embed/" + track.id;
+  document.querySelectorAll(".radio-track").forEach((button,i)=>{
+    button.classList.toggle("active", i === radioIndex);
+  });
+}
+document.querySelectorAll(".radio-track").forEach(button=>{
+  button.addEventListener("click",()=>selectRadioTrack(Number(button.dataset.track)));
+});
+document.getElementById("radioPrev").addEventListener("click",()=>selectRadioTrack(radioIndex-1));
+document.getElementById("radioNext").addEventListener("click",()=>selectRadioTrack(radioIndex+1));
 
 updateFavoriteButtons();
 displayArtists();
