@@ -1183,6 +1183,41 @@ function openArtistSongs(artistName){
     }).slice(0,12);
     if(!results.length){artistSongsStatus.textContent="No verified matching tracks found in the Tunisia Apple Music catalog right now. We hid unrelated results." ;return;}
     artistSongsStatus.textContent = "Showing " + results.length + " matching tracks · tap play for a preview";
+    const playableTracks = results.filter(track=>track.previewUrl);
+    const sharedAudio = document.createElement("audio");
+    sharedAudio.controls = true;
+    sharedAudio.preload = "none";
+    sharedAudio.style.cssText = "display:block;width:100%;margin:10px 0";
+    sharedAudio.setAttribute("aria-label",artistName+" song preview player");
+    let selectedPreviewIndex = -1;
+    const previewControls = document.createElement("div");
+    previewControls.style.cssText = "display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:8px 0";
+    const previewPrev = document.createElement("button");
+    previewPrev.type = "button"; previewPrev.className = "artist-preview-btn"; previewPrev.textContent = "‹ Previous";
+    const previewNext = document.createElement("button");
+    previewNext.type = "button"; previewNext.className = "artist-preview-btn"; previewNext.textContent = "Next ›";
+    const previewNow = document.createElement("strong");
+    previewNow.textContent = "Choose a song preview";
+    previewNow.setAttribute("aria-live","polite");
+    previewControls.append(previewPrev,previewNext,previewNow);
+    artistSongList.append(previewControls,sharedAudio);
+    function selectArtistPreview(index, autoplay=true){
+      if(!playableTracks.length) return;
+      selectedPreviewIndex = (index + playableTracks.length) % playableTracks.length;
+      const selected = playableTracks[selectedPreviewIndex];
+      sharedAudio.src = selected.previewUrl;
+      previewNow.textContent = "Selected: " + (selected.trackName || "Song");
+      artistSongList.querySelectorAll("[data-artist-preview]").forEach(button=>{
+        const active = Number(button.dataset.artistPreview) === selectedPreviewIndex;
+        button.textContent = active ? "✓ Selected" : "▶ Play preview";
+        button.classList.toggle("playing",active);
+        button.setAttribute("aria-pressed",String(active));
+      });
+      if(autoplay) sharedAudio.play().catch(()=>{ previewNow.textContent = "Tap play in the audio player to listen"; });
+    }
+    previewPrev.addEventListener("click",()=>selectArtistPreview(selectedPreviewIndex-1));
+    previewNext.addEventListener("click",()=>selectArtistPreview(selectedPreviewIndex+1));
+    sharedAudio.addEventListener("ended",()=>selectArtistPreview(selectedPreviewIndex+1));
     results.forEach(track=>{
       const row=document.createElement("div"); row.className="artist-song";
       const cover=document.createElement("img"); cover.src=track.artworkUrl100 || ""; cover.alt=""; cover.loading="lazy";
@@ -1193,41 +1228,20 @@ function openArtistSongs(artistName){
       const previewButton=document.createElement("button");
       previewButton.type="button";
       previewButton.className="artist-preview-btn";
+      const playableIndex = playableTracks.indexOf(track);
       previewButton.textContent=track.previewUrl ? "▶ Play preview" : "Preview unavailable";
       previewButton.disabled=!track.previewUrl;
       if(track.previewUrl){
-        const audio=document.createElement("audio");
-        audio.preload="none";
-        audio.src=track.previewUrl;
-        audio.setAttribute("aria-label","Preview "+(track.trackName||"song"));
-        previewButton.addEventListener("click",async()=>{
-          const wasPlaying=!audio.paused;
-          artistSongList.querySelectorAll("audio").forEach(other=>{
-            if(other!==audio){other.pause();other.currentTime=0;}
-            const otherButton=other.parentElement?.querySelector(".artist-preview-btn");
-            if(otherButton){otherButton.textContent="▶ Play preview";otherButton.classList.remove("playing");}
-          });
-          if(wasPlaying){audio.pause();previewButton.textContent="▶ Play preview";previewButton.classList.remove("playing");return;}
-          try{
-            await audio.play();
-            previewButton.textContent="Ⅱ Pause";
-            previewButton.classList.add("playing");
-          }catch(error){
-            previewButton.textContent="Preview unavailable";
-            previewButton.disabled=true;
-          }
-        });
-        audio.addEventListener("ended",()=>{
-          previewButton.textContent="▶ Play preview";
-          previewButton.classList.remove("playing");
-        });
-        audio.addEventListener("pause",()=>{
-          if(audio.ended || audio.currentTime===0 || audio.paused){
+        previewButton.dataset.artistPreview=String(playableIndex);
+        previewButton.addEventListener("click",()=>{
+          if(selectedPreviewIndex===playableIndex && !sharedAudio.paused){
+            sharedAudio.pause();
             previewButton.textContent="▶ Play preview";
             previewButton.classList.remove("playing");
+            return;
           }
+          selectArtistPreview(playableIndex);
         });
-        row.append(audio);
       }
       row.append(previewButton);
       const link=document.createElement("a");link.className="artist-song-link";link.href=track.trackViewUrl || ("https://open.spotify.com/search/"+encodeURIComponent(artistName+" "+(track.trackName||"")));link.target="_blank";link.rel="noopener noreferrer";link.textContent=track.trackViewUrl ? "Open this exact song ↗" : "Find on Spotify ↗";row.append(link);
