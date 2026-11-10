@@ -692,7 +692,7 @@ document.querySelectorAll(".artist-cover img").forEach(img => {
     const cover = img.closest(".artist-cover");
     if (!card || !cover || cover.querySelector(".artist-image-fallback")) return;
     img.style.display = "none";
-    const initials = card.dataset.name.split(/\\s+/).map(part => part[0]).join("").slice(0, 3).toUpperCase();
+    const initials = card.dataset.name.split(/\s+/).map(part => part[0]).join("").slice(0, 3).toUpperCase();
     const fallback = document.createElement("span");
     fallback.className = "artist-image-fallback";
     fallback.textContent = initials;
