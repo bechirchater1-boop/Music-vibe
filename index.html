@@ -179,6 +179,26 @@ section{padding:40px 5%}
 .radio-license{border-top:1px solid #ffffff12;padding-top:12px;line-height:1.6}
 @media(max-width:720px){.radio-art{height:88px;width:88px}.radio-list{max-height:390px}}
 
+
+/* Artist discovery cards */
+.artist-grid{gap:20px}
+.artist-card{position:relative;overflow:hidden;padding:14px;background:linear-gradient(155deg,#1b1625,#111019 72%);border-color:#382b48;box-shadow:0 10px 28px #0003}
+.artist-card:hover{box-shadow:0 16px 34px #0006;border-color:#9b5bd0}
+.artist-cover{height:118px;border-radius:12px;margin-bottom:16px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 70% 20%,#a855f766,transparent 32%),linear-gradient(135deg,#42205f,#171222 65%,#0c0b12);border:1px solid #ffffff12}
+.artist-card:nth-child(3n+2) .artist-cover{background:radial-gradient(circle at 25% 30%,#ec489966,transparent 35%),linear-gradient(135deg,#4b1e45,#171222 70%,#0c0b12)}
+.artist-card:nth-child(3n) .artist-cover{background:radial-gradient(circle at 75% 25%,#38bdf866,transparent 34%),linear-gradient(135deg,#193e59,#171222 70%,#0c0b12)}
+.artist-cover:before,.artist-cover:after{content:"";position:absolute;border:1px solid #ffffff18;border-radius:50%;width:145px;height:145px}
+.artist-cover:after{width:190px;height:190px}
+.artist-cover span{font-size:43px;font-weight:900;letter-spacing:-2px;color:#fff;text-shadow:0 5px 24px #0009;z-index:1}
+.artist-cover small{position:absolute;bottom:9px;left:10px;color:#eadcf7;font-size:9px;font-weight:800;letter-spacing:1.4px;z-index:2}
+.artist-card h3{font-size:19px;letter-spacing:.1px}
+.artist-card>p{font-size:12px;color:#b8a9c6}
+.artist-actions{margin-top:13px}
+.artist-actions a,.artist-actions button{flex:1;text-align:center}
+.artist-actions .favorite{flex:0 0 auto}
+.artist-player iframe{height:152px}
+@media(max-width:600px){.artist-cover{height:105px}.artist-card{padding:12px}}
+
 </style>
 </head>
 
@@ -220,6 +240,7 @@ section{padding:40px 5%}
 <div class="artist-grid" id="artistGrid">
 
 <article class="artist-card" data-name="Samara" data-category="rap">
+<div class="artist-cover"><span>S</span><small>TUNISIAN SPOTLIGHT</small></div>
 <h3>Samara</h3><p>Tunisian Rap</p>
 <div class="artist-actions">
 <button class="play-inline" type="button" data-player="samara">▶ Listen here</button>
@@ -231,6 +252,7 @@ section{padding:40px 5%}
 </article>
 
 <article class="artist-card" data-name="Balti" data-category="rap">
+<div class="artist-cover"><span>B</span><small>TUNISIAN SPOTLIGHT</small></div>
 <h3>Balti</h3><p>Tunisian Rap</p>
 <div class="artist-actions">
 <button class="play-inline" type="button" data-player="balti">▶ Listen here</button>
@@ -242,6 +264,7 @@ section{padding:40px 5%}
 </article>
 
 <article class="artist-card" data-name="Klay BBJ" data-category="rap">
+<div class="artist-cover"><span>K</span><small>TUNISIAN SPOTLIGHT</small></div>
 <h3>Klay BBJ</h3><p>Tunisian Rap</p>
 <div class="artist-actions">
 <button class="play-inline" type="button" data-player="klaybbj">▶ Listen here</button>
@@ -253,6 +276,7 @@ section{padding:40px 5%}
 </article>
 
 <article class="artist-card" data-name="Nordo" data-category="rap">
+<div class="artist-cover"><span>N</span><small>TUNISIAN SPOTLIGHT</small></div>
 <h3>Nordo</h3><p>Tunisian Rap</p>
 <div class="artist-actions">
 <button class="play-inline" type="button" data-player="nordo">▶ Listen here</button>
@@ -264,6 +288,7 @@ section{padding:40px 5%}
 </article>
 
 <article class="artist-card" data-name="Kaso" data-category="rap">
+<div class="artist-cover"><span>K</span><small>TUNISIAN SPOTLIGHT</small></div>
 <h3>Kaso</h3><p>Tunisian Rap</p>
 <div class="artist-actions">
 <button class="play-inline" type="button" data-player="kaso">▶ Listen here</button>
@@ -275,6 +300,7 @@ section{padding:40px 5%}
 </article>
 
 <article class="artist-card" data-name="A.L.A" data-category="rap">
+<div class="artist-cover"><span>A</span><small>TUNISIAN SPOTLIGHT</small></div>
 <h3>A.L.A</h3><p>Tunisian Rap</p>
 <div class="artist-actions">
 <button class="play-inline" type="button" data-player="ala">▶ Listen here</button>
@@ -286,6 +312,7 @@ section{padding:40px 5%}
 </article>
 
 <article class="artist-card" data-name="Blingos" data-category="rap">
+<div class="artist-cover"><span>BL</span><small>TUNISIAN SPOTLIGHT</small></div>
 <h3>Blingos</h3><p>Tunisian Rap</p>
 <div class="artist-actions">
 <button class="play-inline" type="button" data-player="blingos">▶ Listen here</button>
@@ -297,6 +324,7 @@ section{padding:40px 5%}
 </article>
 
 <article class="artist-card" data-name="Sanfara" data-category="rap">
+<div class="artist-cover"><span>SF</span><small>TUNISIAN SPOTLIGHT</small></div>
 <h3>Sanfara</h3><p>Tunisian Rap</p>
 <div class="artist-actions">
 <button class="play-inline" type="button" data-player="sanfara">▶ Listen here</button>
@@ -308,6 +336,7 @@ section{padding:40px 5%}
 </article>
 
 <article class="artist-card" data-name="Arabic Hits" data-category="arabic">
+<div class="artist-cover"><span>AR</span><small>ARABIC SELECTION</small></div>
 <h3>Arabic Hits</h3><p>Arabic Music</p>
 <div class="artist-actions">
 <a class="spotify" target="_blank" rel="noopener" href="https://open.spotify.com/search/Arabic%20Hits">Listen on Spotify</a>
@@ -315,6 +344,7 @@ section{padding:40px 5%}
 </div></article>
 
 <article class="artist-card" data-name="Chill Music" data-category="chill">
+<div class="artist-cover"><span>♪</span><small>MOOD MIX</small></div>
 <h3>Chill Music</h3><p>Chill & Relax</p>
 <div class="artist-actions">
 <a class="spotify" target="_blank" rel="noopener" href="https://open.spotify.com/search/Chill%20Music">Listen on Spotify</a>
