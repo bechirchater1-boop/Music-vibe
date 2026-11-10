@@ -466,20 +466,20 @@ section{padding:40px 5%}
 <h2 class="section-title">MUSIC VIBE Player</h2>
 <p class="section-sub">Choose an artist above. Listen and control playback in one place.</p>
 <div class="unified-player-panel">
-<div class="unified-player-heading"><span class="unified-equalizer">♫</span><div><strong id="unifiedPlayerTitle">Your music is waiting</strong><small id="unifiedPlayerSubtitle">Choose any artist and tap Listen here</small></div></div>
-<iframe id="unifiedSpotifyFrame" title="MUSIC VIBE Spotify player" src="https://open.spotify.com/embed/artist/1ARJNCZXJdkEXKSrXBKE2Q?utm_source=generator" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+<div class="unified-player-heading"><span class="unified-equalizer">♫</span><div><strong id="unifiedPlayerTitle">Samara</strong><small id="unifiedPlayerSubtitle">Ready to listen · Tunisian Rap</small></div></div>
+<iframe id="unifiedSpotifyFrame" title="MUSIC VIBE Spotify player" src="https://open.spotify.com/embed/track/3BzHDdvAdjvGxbQLi0VMBF?utm_source=generator" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
 <p class="unified-player-note">Playback, pause, track selection and volume are controlled inside the Spotify player. Some features may require a Spotify account.</p>
 </div>
 </section>
 
 <section id="radio">
 <h2 class="section-title">MUSIC VIBE Radio</h2>
-<p class="section-sub">A hand-picked mix of independent electronic, pop, jazz, ambient and chill sounds. Every track is listed as CC0 / public domain by Nullrights.</p>
+<p class="section-sub">Discover independent electronic, pop, jazz, ambient and Tunisian-inspired sounds. The first 14 tracks are listed as CC0 by Nullrights; Atlas • Tunisia is shared under the Pixabay Content License.</p>
 <div class="radio-layout">
   <div class="radio-main">
     <div class="radio-topline"><span class="radio-live"><i></i> MUSIC VIBE RADIO</span><span class="radio-count" id="radioPosition">TRACK 01 / 15</span></div>
     <div class="radio-art"><span>♫</span></div>
-    <div class="radio-kicker">Now selected · CC0 music</div>
+    <div class="radio-kicker" id="radioLicenseLabel">License: CC0 1.0 · Nullrights</div>
     <h3 id="radioTitle">Klatch</h3>
     <p class="radio-artist" id="radioArtist">CXR ATK · Electronic</p>
     <iframe class="radio-embed" id="radioEmbed" src="https://nullrights.com/embed/g0enboi9vv" title="MUSIC VIBE CC0 music player" loading="lazy" allow="autoplay"></iframe>
@@ -488,7 +488,7 @@ section{padding:40px 5%}
       <button type="button" id="radioPrev" aria-label="Previous track">◀ Prev</button>
       <button type="button" class="primary" id="radioNext">Next track ▶</button>
     </div>
-    <p class="radio-license">CC0 1.0 · Free for personal and commercial use. Playback controls are provided by the track's embedded player.</p>
+    <p class="radio-license" id="radioLicenseNote">Nullrights lists this recording under CC0 1.0. Playback controls are provided by the embedded player. <a href="https://nullrights.com/" target="_blank" rel="noopener" style="color:#c084fc">License source</a>.</p>
   </div>
   <div class="radio-list" id="radioList">
     <div class="radio-list-head"><h3>Your playlist</h3><span>15 TRACKS</span></div>
@@ -508,7 +508,7 @@ section{padding:40px 5%}
     <button class="radio-track" type="button" data-track="12"><span class="track-num">13</span><span class="track-meta"><strong>elevate</strong><small>CC0 · Nullrights selection</small></span><span class="track-mark">♫</span></button>
     <button class="radio-track" type="button" data-track="13"><span class="track-num">14</span><span class="track-meta"><strong>Cosmic Waves</strong><small>CC0 · Nullrights selection</small></span><span class="track-mark">♫</span></button>
     <button class="radio-track" type="button" data-track="14"><span class="track-num">15</span><span class="track-meta"><strong>Atlas • Tunisia</strong><small>Vadim_Makes_Sound · Mezoued-inspired · 2:05</small></span><span class="track-mark">↗</span></button>
-    <p style="font-size:11px;color:#8f829b;margin:10px 5px 2px">Music courtesy of <a href="https://nullrights.com/" target="_blank" rel="noopener" style="color:#c084fc">nullrights</a>. Track pages show the CC0 license.</p>
+    <p style="font-size:11px;color:#8f829b;margin:10px 5px 2px">Sources: <a href="https://nullrights.com/" target="_blank" rel="noopener" style="color:#c084fc">Nullrights (CC0)</a> and <a href="https://pixabay.com/music/world-atlas-tunisia-595084/" target="_blank" rel="noopener" style="color:#c084fc">Pixabay (Pixabay Content License)</a>. Keep the original track pages as license evidence.</p>
   </div>
 </div>
 </section>
@@ -652,7 +652,7 @@ title.textContent=artist;
 subtitle.textContent="Now selected on MUSIC VIBE";
 document.querySelectorAll("[data-unified-player]").forEach(item=>{
 item.classList.toggle("selected",item===button);
-item.textContent=item===button ? "✓ Selected" : "▶ Listen here";
+item.textContent=item===button ? "✓ In player" : "▶ Listen here";
 });
 document.getElementById("unified-player").scrollIntoView({behavior:"smooth",block:"center"});
 });
@@ -705,16 +705,22 @@ let radioIndex = 0;
 function selectRadioTrack(index){
   radioIndex = (index + radioTracks.length) % radioTracks.length;
   const track = radioTracks[radioIndex];
+  const licenseLabel = document.getElementById("radioLicenseLabel");
+  const licenseNote = document.getElementById("radioLicenseNote");
   document.getElementById("radioPosition").textContent = "TRACK " + String(radioIndex+1).padStart(2,"0") + " / " + radioTracks.length;
   document.getElementById("radioTitle").textContent = track.title;
   document.getElementById("radioArtist").textContent = track.artist;
   const radioEmbed = document.getElementById("radioEmbed");
   const externalLink = document.getElementById("radioExternalLink");
   if(track.url){
+    licenseLabel.textContent = "License: Pixabay Content License";
+    licenseNote.innerHTML = 'Pixabay permits commercial and non-commercial use subject to its restrictions. This track must not be redistributed on its own as a standalone file. <a href="https://pixabay.com/service/license-summary/" target="_blank" rel="noopener" style="color:#c084fc">Read license</a> · <a href="https://pixabay.com/music/world-atlas-tunisia-595084/" target="_blank" rel="noopener" style="color:#c084fc">Track source</a>.';
     radioEmbed.style.display = "none";
     externalLink.href = track.url;
     externalLink.style.display = "inline-block";
   }else{
+    licenseLabel.textContent = "License: CC0 1.0 · Nullrights";
+    licenseNote.innerHTML = 'Nullrights lists this recording under CC0 1.0. Playback controls are provided by the embedded player. <a href="https://nullrights.com/" target="_blank" rel="noopener" style="color:#c084fc">License source</a>.';
     radioEmbed.style.display = "block";
     radioEmbed.src = "https://nullrights.com/embed/" + track.id;
     externalLink.style.display = "none";
