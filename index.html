@@ -199,6 +199,15 @@ section{padding:40px 5%}
 .artist-player iframe{height:152px}
 @media(max-width:600px){.artist-cover{height:105px}.artist-card{padding:12px}}
 
+
+/* Real artist portraits */
+.artist-cover{isolation:isolate;background:#171222}
+.artist-cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 28%;z-index:-1;transition:transform .35s ease;filter:saturate(.92)}
+.artist-card:hover .artist-cover img{transform:scale(1.06)}
+.artist-cover:before{z-index:0;background:linear-gradient(0deg,#090811d9 0%,transparent 72%);width:100%;height:100%;border:0;border-radius:0}
+.artist-cover:after{display:none}
+.artist-cover small{z-index:1;background:#09081188;padding:4px 7px;border-radius:5px;backdrop-filter:blur(5px)}
+
 </style>
 </head>
 
@@ -240,7 +249,7 @@ section{padding:40px 5%}
 <div class="artist-grid" id="artistGrid">
 
 <article class="artist-card" data-name="Samara" data-category="rap">
-<div class="artist-cover"><span>S</span><small>TUNISIAN SPOTLIGHT</small></div>
+<div class="artist-cover"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Samara_rappeur.jpg/1280px-Samara_rappeur.jpg" alt="Samara portrait" loading="lazy" referrerpolicy="no-referrer"><small>TUNISIAN SPOTLIGHT</small></div>
 <h3>Samara</h3><p>Tunisian Rap</p>
 <div class="artist-actions">
 <button class="play-inline" type="button" data-player="samara">▶ Listen here</button>
@@ -252,7 +261,7 @@ section{padding:40px 5%}
 </article>
 
 <article class="artist-card" data-name="Balti" data-category="rap">
-<div class="artist-cover"><span>B</span><small>TUNISIAN SPOTLIGHT</small></div>
+<div class="artist-cover"><img src="https://webcms.billboardarabia.com/billboard/uploads/images/2026/04/10/2202511.webp" alt="Balti portrait" loading="lazy" referrerpolicy="no-referrer"><small>TUNISIAN SPOTLIGHT</small></div>
 <h3>Balti</h3><p>Tunisian Rap</p>
 <div class="artist-actions">
 <button class="play-inline" type="button" data-player="balti">▶ Listen here</button>
@@ -264,7 +273,7 @@ section{padding:40px 5%}
 </article>
 
 <article class="artist-card" data-name="Klay BBJ" data-category="rap">
-<div class="artist-cover"><span>K</span><small>TUNISIAN SPOTLIGHT</small></div>
+<div class="artist-cover"><img src="https://media2.giphy.com/avatars/klaybbj/cwaxZZQbQISa.png" alt="Klay BBJ portrait" loading="lazy" referrerpolicy="no-referrer"><small>TUNISIAN SPOTLIGHT</small></div>
 <h3>Klay BBJ</h3><p>Tunisian Rap</p>
 <div class="artist-actions">
 <button class="play-inline" type="button" data-player="klaybbj">▶ Listen here</button>
@@ -276,7 +285,7 @@ section{padding:40px 5%}
 </article>
 
 <article class="artist-card" data-name="Nordo" data-category="rap">
-<div class="artist-cover"><span>N</span><small>TUNISIAN SPOTLIGHT</small></div>
+<div class="artist-cover"><img src="https://ar.webmanagercenter.com/wp-content/uploads/2023/01/norod.jpg" alt="Nordo portrait" loading="lazy" referrerpolicy="no-referrer"><small>TUNISIAN SPOTLIGHT</small></div>
 <h3>Nordo</h3><p>Tunisian Rap</p>
 <div class="artist-actions">
 <button class="play-inline" type="button" data-player="nordo">▶ Listen here</button>
@@ -288,7 +297,7 @@ section{padding:40px 5%}
 </article>
 
 <article class="artist-card" data-name="Kaso" data-category="rap">
-<div class="artist-cover"><span>K</span><small>TUNISIAN SPOTLIGHT</small></div>
+<div class="artist-cover"><img src="https://api.tunis.events/storage/7b4418cfce128ebea49914db6d93a809.jpg" alt="Kaso portrait" loading="lazy" referrerpolicy="no-referrer"><small>TUNISIAN SPOTLIGHT</small></div>
 <h3>Kaso</h3><p>Tunisian Rap</p>
 <div class="artist-actions">
 <button class="play-inline" type="button" data-player="kaso">▶ Listen here</button>
@@ -300,7 +309,7 @@ section{padding:40px 5%}
 </article>
 
 <article class="artist-card" data-name="A.L.A" data-category="rap">
-<div class="artist-cover"><span>A</span><small>TUNISIAN SPOTLIGHT</small></div>
+<div class="artist-cover"><img src="https://framerusercontent.com/images/aSxc27TviaCY3nsEQtBO02J31E.jpg" alt="A.L.A portrait" loading="lazy" referrerpolicy="no-referrer"><small>TUNISIAN SPOTLIGHT</small></div>
 <h3>A.L.A</h3><p>Tunisian Rap</p>
 <div class="artist-actions">
 <button class="play-inline" type="button" data-player="ala">▶ Listen here</button>
@@ -312,7 +321,7 @@ section{padding:40px 5%}
 </article>
 
 <article class="artist-card" data-name="Blingos" data-category="rap">
-<div class="artist-cover"><span>BL</span><small>TUNISIAN SPOTLIGHT</small></div>
+<div class="artist-cover"><img src="https://i.scdn.co/image/ab6761610000e5eb86ccc6a9b690ed539e456754" alt="Blingos portrait" loading="lazy" referrerpolicy="no-referrer"><small>TUNISIAN SPOTLIGHT</small></div>
 <h3>Blingos</h3><p>Tunisian Rap</p>
 <div class="artist-actions">
 <button class="play-inline" type="button" data-player="blingos">▶ Listen here</button>
@@ -324,7 +333,7 @@ section{padding:40px 5%}
 </article>
 
 <article class="artist-card" data-name="Sanfara" data-category="rap">
-<div class="artist-cover"><span>SF</span><small>TUNISIAN SPOTLIGHT</small></div>
+<div class="artist-cover"><img src="https://alalam24.press.ma/static/uploads/2023/04/IMG-20230404-WA0014.jpg" alt="Sanfara portrait" loading="lazy" referrerpolicy="no-referrer"><small>TUNISIAN SPOTLIGHT</small></div>
 <h3>Sanfara</h3><p>Tunisian Rap</p>
 <div class="artist-actions">
 <button class="play-inline" type="button" data-player="sanfara">▶ Listen here</button>
