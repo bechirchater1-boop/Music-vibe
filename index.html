@@ -1075,6 +1075,25 @@ function openArtistSongs(artistName){
   artistSongList.replaceChildren();
   artistSongsPanel.classList.add("open");
   artistSongsPanel.scrollIntoView({behavior:"smooth",block:"start"});
+  const normalizedArtist = artistName.normalize("NFD").replace(/[\\u0300-\\u036f]/g,"").toLowerCase().trim();
+  if(normalizedArtist === "samara" || normalizedArtist === "samara riahi"){
+    artistSongsStatus.textContent = "Official Samara channel · latest uploads and songs";
+    const officialFrame = document.createElement("iframe");
+    officialFrame.src = "https://www.youtube-nocookie.com/embed/videoseries?list=UUEonTFGPeAX7fmq28pfs6Vg";
+    officialFrame.title = "Samara official YouTube uploads";
+    officialFrame.loading = "lazy";
+    officialFrame.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+    officialFrame.allowFullscreen = true;
+    artistSongList.append(officialFrame);
+    const officialLink = document.createElement("a");
+    officialLink.className = "artist-song-link";
+    officialLink.href = "https://www.youtube.com/@samara_riahi/videos";
+    officialLink.target = "_blank";
+    officialLink.rel = "noopener noreferrer";
+    officialLink.textContent = "Open Samara official YouTube channel ↗";
+    artistSongList.append(officialLink);
+    return;
+  }
   const url = "https://itunes.apple.com/search?term=" + encodeURIComponent(artistName) + "&entity=song&attribute=artistTerm&limit=50&country=TN";
   fetch(url).then(response=>{
     if(!response.ok) throw new Error("Song search unavailable");
