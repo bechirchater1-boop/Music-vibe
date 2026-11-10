@@ -16,6 +16,7 @@
 <meta name="twitter:description" content="Discover Tunisian rap, Arabic hits and international music.">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"MUSIC VIBE","url":"https://music-vibe.bechirchater1.workers.dev/","description":"Discover Tunisian rap, Arabic music and international artists.","inLanguage":"en"}</script>
 <link rel="canonical" href="https://music-vibe.bechirchater1.workers.dev/">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Can I listen to full songs on MUSIC VIBE?","acceptedAnswer":{"@type":"Answer","text":"Artist music is played through the embedded Spotify player. Spotify controls, availability and account requirements are managed by Spotify."}},{"@type":"Question","name":"Is MUSIC VIBE affiliated with Spotify or artists?","acceptedAnswer":{"@type":"Answer","text":"No. MUSIC VIBE is an independent music-discovery website and does not represent or endorse the artists or streaming services listed here."}},{"@type":"Question","name":"How are my favorites saved?","acceptedAnswer":{"@type":"Answer","text":"Selected favorites are stored locally in the visitor's browser and are not sent to a MUSIC VIBE account or server by this page."}},{"@type":"Question","name":"Can artists submit their music?","acceptedAnswer":{"@type":"Answer","text":"Independent creators can contact MUSIC VIBE at bechirchater1@gmail.com with their artist name and music link."}}]}</script>
 <title>MUSIC VIBE | Discover Your Sound</title>
 
 <style>
@@ -63,6 +64,10 @@ padding:12px 24px;border-radius:30px;
 font-weight:bold;margin-top:12px
 }
 .btn:hover{background:#a855f7}
+.hero-actions{display:flex;justify-content:center;align-items:center;gap:12px;flex-wrap:wrap}
+.share-site-btn{border:1px solid #b76cff;background:transparent;color:#eadcf7;cursor:pointer}
+.share-site-btn:hover{background:#29183a}
+.share-status{min-height:22px;color:#d8b4fe;font-size:12px;margin-top:8px}
 section{padding:55px 6%}
 .section-title{font-size:28px;margin-bottom:8px}
 .section-sub{color:#999;margin-bottom:25px}
@@ -246,6 +251,7 @@ section{padding:40px 5%}
 <a href="#radio">Vibe Radio</a>
 <a href="#playlist">Playlist</a>
 <a href="#guides">Guides</a>
+<a href="#faq">FAQ</a>
 <a href="#about">About</a>
 <a href="#contact">Contact</a>
 <a href="#terms">Terms</a>
@@ -256,7 +262,11 @@ section{padding:40px 5%}
 <div class="hero">
 <h1>DISCOVER YOUR <span>SOUND</span></h1>
 <p>Your destination for Tunisian rap, Arabic music and fresh sounds. Discover artists and find your next favorite song.</p>
+<div class="hero-actions">
 <a class="btn" href="#artists">Explore Artists</a>
+<button class="btn share-site-btn" id="shareSite" type="button">Share MUSIC VIBE ↗</button>
+</div>
+<p id="shareStatus" class="share-status" role="status" aria-live="polite"></p>
 </div>
 
 <section id="artists">
@@ -560,6 +570,17 @@ loading="lazy">
 </div>
 </section>
 
+<section id="faq">
+<h2 class="section-title">Frequently Asked Questions</h2>
+<p class="section-sub">Quick answers about listening and using MUSIC VIBE.</p>
+<div class="guides">
+<div class="guide"><h3>Can I listen to full songs here?</h3><p>Artist music is played through the embedded Spotify player. Spotify controls, availability and account requirements are managed by Spotify.</p></div>
+<div class="guide"><h3>Is MUSIC VIBE affiliated with Spotify or artists?</h3><p>No. MUSIC VIBE is an independent music-discovery website and does not represent or endorse the artists or streaming services listed here.</p></div>
+<div class="guide"><h3>How are my favorites saved?</h3><p>Your selected favorites are stored locally in your browser. They are not sent to a MUSIC VIBE account or server by this page.</p></div>
+<div class="guide"><h3>Can artists submit their music?</h3><p>Yes. Independent creators can contact us at bechirchater1@gmail.com with their artist name, music link and preferred profile information.</p></div>
+</div>
+</section>
+
 <section id="creators">
 <h2 class="section-title">For Creators</h2>
 <div class="panel">
@@ -682,6 +703,34 @@ emptyMessage.style.display = visibleCount ? "none" : "block";
 }
 
 searchInput.addEventListener("input", displayArtists);
+
+const shareSiteButton = document.getElementById("shareSite");
+const shareStatus = document.getElementById("shareStatus");
+if (shareSiteButton) {
+  shareSiteButton.addEventListener("click", async () => {
+    const shareData = {
+      title: "MUSIC VIBE — Discover Your Sound",
+      text: "Discover Tunisian rap, Arabic music and international artists on MUSIC VIBE.",
+      url: window.location.origin + window.location.pathname
+    };
+    try {
+      if (navigator.share) {
+        await navigator.share(shareData);
+        if (shareStatus) shareStatus.textContent = "Thanks for sharing MUSIC VIBE!";
+      } else if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(shareData.url);
+        if (shareStatus) shareStatus.textContent = "Website link copied. Share it with your friends!";
+      } else {
+        window.open("https://wa.me/?text=" + encodeURIComponent(shareData.text + " " + shareData.url), "_blank", "noopener");
+        if (shareStatus) shareStatus.textContent = "Share MUSIC VIBE on WhatsApp.";
+      }
+    } catch (error) {
+      if (error && error.name !== "AbortError" && shareStatus) {
+        shareStatus.textContent = "You can copy the website address from your browser and share it.";
+      }
+    }
+  });
+}
 
 // Attach image fallbacks once during page initialization, not only after a favorite is clicked.
 document.querySelectorAll(".artist-cover img").forEach(img => {
