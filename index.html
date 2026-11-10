@@ -1075,10 +1075,15 @@ function openArtistSongs(artistName){
   artistSongList.replaceChildren();
   artistSongsPanel.classList.add("open");
   artistSongsPanel.scrollIntoView({behavior:"smooth",block:"start"});
-  const normalizedArtist = artistName.normalize("NFD").replace(/[\\u0300-\\u036f]/g,"").toLowerCase().trim();
+  const normalizedArtist = artistName.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().trim();
   if(normalizedArtist === "samara" || normalizedArtist === "samara riahi"){
     artistSongsStatus.textContent = "Official Samara videos · choose a song to play";
     const samaraTracks = [
+      {title:"Ghyabek", detail:"Latest Audio · 2026", id:"K81yxpB3LHc"},
+      {title:"Hkeya", detail:"Official AI Music Video · 2026", id:"GpRl3PNsmeM"},
+      {title:"4 You", detail:"Official Music Video · 2026", id:"qSCtCTCC2Sg"},
+      {title:"Maktoub", detail:"Demo · 2026", id:"LbFYnCvaxK8"},
+      {title:"Mani Kifhom", detail:"Demo · 2025", id:"gCiTMYOvGdM"},
       {title:"Souk", detail:"Official Music Video · Trafiquant Album", id:"ZjrZWIISlY8"},
       {title:"Galbi", detail:"Official Music Video", id:"2AShpYyyeJM"},
       {title:"Galbi Taaba", detail:"Official Music Video", id:"QJEVhhtdhhM"}
@@ -1140,9 +1145,9 @@ function openArtistSongs(artistName){
   }).then(data=>{
     if(requestId !== artistSongsRequest) return;
     const rawResults = Array.isArray(data.results) ? data.results : [];
-    const wantedArtist = artistName.normalize("NFD").replace(/[\\u0300-\\u036f]/g,"").toLowerCase().trim();
+    const wantedArtist = artistName.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().trim();
     const results = rawResults.filter(track=>{
-      const returnedArtist = (track.artistName || "").normalize("NFD").replace(/[\\u0300-\\u036f]/g,"").toLowerCase();
+      const returnedArtist = (track.artistName || "").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
       return returnedArtist.split(/\\s*(?:,|&|feat\\.?|ft\\.?|x|×)\\s*/).some(name=>name.trim()===wantedArtist) || returnedArtist===wantedArtist;
     }).slice(0,12);
     if(!results.length){artistSongsStatus.textContent="No verified matching tracks found in the Tunisia Apple Music catalog right now. We hid unrelated results." ;return;}
