@@ -16,6 +16,10 @@ This file is a working rights checklist. A credit line is not the same as permis
 
 The image files are displayed as editorial artist references, not endorsements. Keep the linked attribution and license information visible on the website.
 
+| Sherine Abdel Wahab | Wikimedia Commons, uploader/source Arab Idol | CC BY 3.0 | https://commons.wikimedia.org/wiki/File:%D8%B4%D9%8A%D8%B1%D9%8A%D9%86.jpg |
+| Travis Scott | AJ | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Travis_Scott_2023.jpg |
+| Adele | Mpawsey | CC BY-SA (see file page for offered versions) | https://commons.wikimedia.org/wiki/File:Adele.jpg |
+
 ### Existing portraits — re-check source permissions before monetization
 
 | Artist | Current image source | Review status |
