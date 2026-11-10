@@ -477,12 +477,13 @@ section{padding:40px 5%}
 <p class="section-sub">A hand-picked mix of independent electronic, pop, jazz, ambient and chill sounds. Every track is listed as CC0 / public domain by Nullrights.</p>
 <div class="radio-layout">
   <div class="radio-main">
-    <div class="radio-topline"><span class="radio-live"><i></i> MUSIC VIBE RADIO</span><span class="radio-count" id="radioPosition">TRACK 01 / 14</span></div>
+    <div class="radio-topline"><span class="radio-live"><i></i> MUSIC VIBE RADIO</span><span class="radio-count" id="radioPosition">TRACK 01 / 15</span></div>
     <div class="radio-art"><span>♫</span></div>
     <div class="radio-kicker">Now selected · CC0 music</div>
     <h3 id="radioTitle">Klatch</h3>
     <p class="radio-artist" id="radioArtist">CXR ATK · Electronic</p>
     <iframe class="radio-embed" id="radioEmbed" src="https://nullrights.com/embed/g0enboi9vv" title="MUSIC VIBE CC0 music player" loading="lazy" allow="autoplay"></iframe>
+    <a id="radioExternalLink" class="btn" href="https://pixabay.com/music/world-atlas-tunisia-595084/" target="_blank" rel="noopener" style="display:none;margin-top:12px">Open / play on Pixabay ↗</a>
     <div class="radio-controls">
       <button type="button" id="radioPrev" aria-label="Previous track">◀ Prev</button>
       <button type="button" class="primary" id="radioNext">Next track ▶</button>
@@ -490,7 +491,7 @@ section{padding:40px 5%}
     <p class="radio-license">CC0 1.0 · Free for personal and commercial use. Playback controls are provided by the track's embedded player.</p>
   </div>
   <div class="radio-list" id="radioList">
-    <div class="radio-list-head"><h3>Your playlist</h3><span>14 TRACKS</span></div>
+    <div class="radio-list-head"><h3>Your playlist</h3><span>15 TRACKS</span></div>
     <input class="radio-search" id="radioSearch" type="search" placeholder="Search this playlist...">
     <button class="radio-track active" type="button" data-track="0"><span class="track-num">01</span><span class="track-meta"><strong>Klatch</strong><small>CXR ATK · Electronic · 2:57</small></span><span class="track-mark">♫</span></button>
     <button class="radio-track" type="button" data-track="1"><span class="track-num">02</span><span class="track-meta"><strong>FL Version of October Jazz</strong><small>Pro Sensory · Jazz</small></span><span class="track-mark">♫</span></button>
@@ -506,6 +507,7 @@ section{padding:40px 5%}
     <button class="radio-track" type="button" data-track="11"><span class="track-num">12</span><span class="track-meta"><strong>Please hold</strong><small>CC0 · Nullrights selection</small></span><span class="track-mark">♫</span></button>
     <button class="radio-track" type="button" data-track="12"><span class="track-num">13</span><span class="track-meta"><strong>elevate</strong><small>CC0 · Nullrights selection</small></span><span class="track-mark">♫</span></button>
     <button class="radio-track" type="button" data-track="13"><span class="track-num">14</span><span class="track-meta"><strong>Cosmic Waves</strong><small>CC0 · Nullrights selection</small></span><span class="track-mark">♫</span></button>
+    <button class="radio-track" type="button" data-track="14"><span class="track-num">15</span><span class="track-meta"><strong>Atlas • Tunisia</strong><small>Vadim_Makes_Sound · Mezoued-inspired · 2:05</small></span><span class="track-mark">↗</span></button>
     <p style="font-size:11px;color:#8f829b;margin:10px 5px 2px">Music courtesy of <a href="https://nullrights.com/" target="_blank" rel="noopener" style="color:#c084fc">nullrights</a>. Track pages show the CC0 license.</p>
   </div>
 </div>
@@ -696,7 +698,8 @@ const radioTracks = [
   {title:"Just Do!",artist:"Lao Ban · Pop",id:"eotcfr6107"},
   {title:"Please hold",artist:"Nullrights · CC0",id:"mrsi4oguht"},
   {title:"elevate",artist:"Nullrights · CC0",id:"5gcryw5w8m"},
-  {title:"Cosmic Waves",artist:"Nullrights · CC0",id:"bzditqj2dq"}
+  {title:"Cosmic Waves",artist:"Nullrights · CC0",id:"bzditqj2dq"},
+  {title:"Atlas • Tunisia",artist:"Vadim_Makes_Sound · Mezoued-inspired · Pixabay",url:"https://pixabay.com/music/world-atlas-tunisia-595084/"}
 ];
 let radioIndex = 0;
 function selectRadioTrack(index){
@@ -705,7 +708,17 @@ function selectRadioTrack(index){
   document.getElementById("radioPosition").textContent = "TRACK " + String(radioIndex+1).padStart(2,"0") + " / " + radioTracks.length;
   document.getElementById("radioTitle").textContent = track.title;
   document.getElementById("radioArtist").textContent = track.artist;
-  document.getElementById("radioEmbed").src = "https://nullrights.com/embed/" + track.id;
+  const radioEmbed = document.getElementById("radioEmbed");
+  const externalLink = document.getElementById("radioExternalLink");
+  if(track.url){
+    radioEmbed.style.display = "none";
+    externalLink.href = track.url;
+    externalLink.style.display = "inline-block";
+  }else{
+    radioEmbed.style.display = "block";
+    radioEmbed.src = "https://nullrights.com/embed/" + track.id;
+    externalLink.style.display = "none";
+  }
   document.querySelectorAll(".radio-track").forEach((button,i)=>{
     button.classList.toggle("active", i === radioIndex);
   });
