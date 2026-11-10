@@ -4,16 +4,28 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#090811">
-<meta name="description" content="Discover Tunisian rap, Arabic music, and international artists on MUSIC VIBE. Explore music from around the world.">
+<meta name="description" content="Discover Tunisian rap, Arabic hits and international music on MUSIC VIBE. Explore artist profiles, listen with Spotify and discover independent sounds on Vibe Radio.">
 <meta name="google-site-verification" content="8o0RAgg5fT0uXOgthV9aRfXids5gpw9qRdrUhUJOVSA">
+<meta name="robots" content="index,follow,max-image-preview:large">
 <meta property="og:title" content="MUSIC VIBE | Discover Your Sound">
-<meta property="og:description" content="Discover Tunisian rap and Arabic music.">
+<meta property="og:description" content="Discover Tunisian rap, Arabic hits and international artists. Find your next favorite sound on MUSIC VIBE.">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://music-vibe.bechirchater1.workers.dev/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MUSIC VIBE | Discover Your Sound">
+<meta name="twitter:description" content="Discover Tunisian rap, Arabic hits and international music.">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"MUSIC VIBE","url":"https://music-vibe.bechirchater1.workers.dev/","description":"Discover Tunisian rap, Arabic music and international artists.","inLanguage":"en"}</script>
 <link rel="canonical" href="https://music-vibe.bechirchater1.workers.dev/">
 <title>MUSIC VIBE | Discover Your Sound</title>
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
+.skip-link{position:absolute;left:-9999px;top:8px;background:#fff;color:#111;padding:10px 14px;border-radius:8px;z-index:1000}
+.skip-link:focus{left:12px}
+:focus-visible{outline:3px solid #d8b4fe;outline-offset:3px}
+button,a,input{font:inherit}
+img{max-width:100%}
+
 html{scroll-behavior:smooth}
 body{
 background:#090811;
@@ -225,6 +237,7 @@ section{padding:40px 5%}
 </head>
 
 <body>
+<a class="skip-link" href="#main-content">Skip to content</a>
 
 <header>
 <a class="logo" href="#">MUSIC <span>VIBE</span></a>
@@ -238,7 +251,7 @@ section{padding:40px 5%}
 </nav>
 </header>
 
-<main>
+<main id="main-content">
 <div class="hero">
 <h1>DISCOVER YOUR <span>SOUND</span></h1>
 <p>Your destination for Tunisian rap, Arabic music and fresh sounds. Discover artists and find your next favorite song.</p>
@@ -249,7 +262,7 @@ section{padding:40px 5%}
 <h2 class="section-title">Discover Artists</h2>
 <p class="section-sub">Explore artists and listen using the player inside MUSIC VIBE.</p>
 
-<input class="search-box" id="search" type="search" placeholder="Search for an artist...">
+<input class="search-box" id="search" type="search" aria-label="Search artists" placeholder="Search for an artist...">
 
 <div class="filters">
 <button class="filter active" data-filter="all">All</button>
@@ -494,7 +507,7 @@ section{padding:40px 5%}
   </div>
   <div class="radio-list" id="radioList">
     <div class="radio-list-head"><h3>Your playlist</h3><span>15 TRACKS</span></div>
-    <input class="radio-search" id="radioSearch" type="search" placeholder="Search this playlist...">
+    <input class="radio-search" id="radioSearch" type="search" aria-label="Search radio playlist" placeholder="Search this playlist...">
     <button class="radio-track active" type="button" data-track="0"><span class="track-num">01</span><span class="track-meta"><strong>Klatch</strong><small>CXR ATK · Electronic · 2:57</small></span><span class="track-mark">♫</span></button>
     <button class="radio-track" type="button" data-track="1"><span class="track-num">02</span><span class="track-meta"><strong>FL Version of October Jazz</strong><small>Pro Sensory · Jazz</small></span><span class="track-mark">♫</span></button>
     <button class="radio-track" type="button" data-track="2"><span class="track-num">03</span><span class="track-meta"><strong>Fevered Dream</strong><small>Tsorthan Grove · Ambient</small></span><span class="track-mark">♫</span></button>
@@ -646,6 +659,22 @@ emptyMessage.style.display = visibleCount ? "none" : "block";
 
 searchInput.addEventListener("input", displayArtists);
 
+// Attach image fallbacks once during page initialization, not only after a favorite is clicked.
+document.querySelectorAll(".artist-cover img").forEach(img => {
+  img.addEventListener("error", () => {
+    const card = img.closest(".artist-card");
+    const cover = img.closest(".artist-cover");
+    if (!card || !cover || cover.querySelector(".artist-image-fallback")) return;
+    img.style.display = "none";
+    const initials = (card.dataset.name || "MV").split(/\s+/).map(part => part[0]).join("").slice(0, 3).toUpperCase();
+    const fallback = document.createElement("span");
+    fallback.className = "artist-image-fallback";
+    fallback.setAttribute("aria-label", card.dataset.name + " image unavailable");
+    fallback.textContent = initials;
+    cover.appendChild(fallback);
+  }, { once: true });
+});
+
 document.querySelectorAll("[data-unified-player]").forEach(button=>{
 button.addEventListener("click",()=>{
 const frame=document.getElementById("unifiedSpotifyFrame");
@@ -684,22 +713,7 @@ favorites = favorites.filter(item=>item !== name);
 favorites.push(name);
 }
 
-localStorage.setItem("musicVibeFavorites", JSON.stringify(favorites));
-// Show a clean initials fallback if an artist portrait URL is unavailable.
-document.querySelectorAll(".artist-cover img").forEach(img => {
-  img.addEventListener("error", () => {
-    const card = img.closest(".artist-card");
-    const cover = img.closest(".artist-cover");
-    if (!card || !cover || cover.querySelector(".artist-image-fallback")) return;
-    img.style.display = "none";
-    const initials = card.dataset.name.split(/\s+/).map(part => part[0]).join("").slice(0, 3).toUpperCase();
-    const fallback = document.createElement("span");
-    fallback.className = "artist-image-fallback";
-    fallback.textContent = initials;
-    cover.appendChild(fallback);
-  }, { once: true });
-});
-
+try { localStorage.setItem("musicVibeFavorites", JSON.stringify(favorites)); } catch (error) { /* Favorites remain available until this page is closed. */ }
 updateFavoriteButtons();
 displayArtists();
 });
