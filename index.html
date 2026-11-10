@@ -1169,6 +1169,79 @@ function openArtistSongs(artistName){
     artistSongList.append(officialLink);
     return;
   }
+  const officialArtistTracks = {
+    "balti": [
+      {title:"Ya Hasra", detail:"Official Music Video · Thisiz Balti", id:"tS8nzAQg_8k"}
+    ],
+    "nordo": [
+      {title:"Youm Wara Youm", detail:"Official Music Video · MARWEN NORDO", id:"JYnc1luZ0Zc"}
+    ],
+    "a.l.a": [
+      {title:"Wfet", detail:"Official Music Video · A.L.A", id:"VgmeHYDayL8"}
+    ]
+  };
+  const officialTracks = officialArtistTracks[normalizedArtist];
+  if(officialTracks){
+    artistSongsStatus.textContent = "Official music videos · choose a song to play";
+    const heading = document.createElement("div");
+    heading.style.cssText = "display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:4px 0 10px";
+    const nowPlaying = document.createElement("strong");
+    nowPlaying.textContent = "Now selected: " + officialTracks[0].title;
+    nowPlaying.setAttribute("aria-live","polite");
+    const navigation = document.createElement("div");
+    navigation.style.cssText = "display:flex;gap:8px";
+    const previous = document.createElement("button");
+    previous.type = "button"; previous.className = "artist-preview-btn"; previous.textContent = "‹ Previous";
+    const next = document.createElement("button");
+    next.type = "button"; next.className = "artist-preview-btn"; next.textContent = "Next ›";
+    navigation.append(previous,next); heading.append(nowPlaying,navigation); artistSongList.append(heading);
+    const player = document.createElement("iframe");
+    player.title = artistName + " official music video player";
+    player.loading = "lazy";
+    player.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+    player.allowFullscreen = true;
+    player.src = "https://www.youtube-nocookie.com/embed/" + officialTracks[0].id + "?rel=0";
+    artistSongList.append(player);
+    let selectedIndex = 0;
+    function selectOfficialTrack(index, autoplay){
+      selectedIndex = (index + officialTracks.length) % officialTracks.length;
+      const track = officialTracks[selectedIndex];
+      nowPlaying.textContent = "Selected: " + track.title;
+      player.title = artistName + " — " + track.title;
+      player.src = "https://www.youtube-nocookie.com/embed/" + track.id + (autoplay ? "?autoplay=1&rel=0" : "?rel=0");
+      artistSongList.querySelectorAll("[data-official-track]").forEach(button=>{
+        const active = Number(button.dataset.officialTrack) === selectedIndex;
+        button.textContent = active ? "✓ Selected" : "▶ Play";
+        button.classList.toggle("playing",active);
+        button.setAttribute("aria-pressed",String(active));
+      });
+    }
+    previous.addEventListener("click",()=>selectOfficialTrack(selectedIndex-1,true));
+    next.addEventListener("click",()=>selectOfficialTrack(selectedIndex+1,true));
+    officialTracks.forEach((track,index)=>{
+      const row = document.createElement("div"); row.className = "artist-song";
+      const cover = document.createElement("img");
+      cover.src = "https://i.ytimg.com/vi/" + track.id + "/hqdefault.jpg";
+      cover.alt = track.title + " cover"; cover.loading = "lazy";
+      const info = document.createElement("div"); info.className = "artist-song-info";
+      const title = document.createElement("strong"); title.textContent = track.title;
+      const meta = document.createElement("small"); meta.textContent = track.detail;
+      info.append(title,meta);
+      const play = document.createElement("button");
+      play.type = "button"; play.className = "artist-preview-btn";
+      play.dataset.officialTrack = String(index);
+      play.textContent = index === 0 ? "✓ Selected" : "▶ Play";
+      play.setAttribute("aria-pressed",String(index === 0));
+      play.addEventListener("click",()=>selectOfficialTrack(index,true));
+      const open = document.createElement("a");
+      open.className = "artist-song-link";
+      open.href = "https://www.youtube.com/watch?v=" + track.id;
+      open.target = "_blank"; open.rel = "noopener noreferrer";
+      open.textContent = "Open exact song ↗";
+      row.append(cover,info,play,open); artistSongList.append(row);
+    });
+    return;
+  }
   const url = "https://itunes.apple.com/search?term=" + encodeURIComponent(artistName) + "&entity=song&attribute=artistTerm&limit=50&country=TN";
   fetch(url).then(response=>{
     if(!response.ok) throw new Error("Song search unavailable");
