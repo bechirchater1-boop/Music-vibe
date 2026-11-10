@@ -696,6 +696,8 @@ document.querySelectorAll(".artist-cover img").forEach(img => {
     fallback.textContent = initials;
     cover.appendChild(fallback);
   }, { once: true });
+  // Handle images that failed before this script attached its listener.
+  if (img.complete && img.naturalWidth === 0) img.dispatchEvent(new Event("error"));
 });
 
 document.querySelectorAll("[data-unified-player]").forEach(button=>{
