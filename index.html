@@ -78,6 +78,10 @@ border:1px solid #40344e;background:#15121e;
 color:white;font-size:15px;margin:10px 0 20px
 }
 .filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:25px}
+.artist-count{color:#bda9cf;font-size:13px;margin:-10px 0 14px}
+.load-more-wrap{text-align:center;padding:24px 0 8px}
+.load-more-btn{border:1px solid #8b45bd;background:#21152e;color:#fff;padding:12px 24px;border-radius:24px;cursor:pointer;font-weight:bold}
+.load-more-btn:hover{background:#9333ea}
 .filter{
 border:1px solid #49365e;color:#ddd;
 background:#171320;padding:9px 17px;
@@ -284,6 +288,7 @@ section{padding:40px 5%}
 <button class="filter" data-filter="favorites">Favorites ♥</button>
 </div>
 
+<p class="artist-count" id="artistCount" aria-live="polite"></p>
 <div class="artist-grid" id="artistGrid">
 
 <article class="artist-card" data-name="Samara" data-category="rap">
@@ -691,6 +696,7 @@ section{padding:40px 5%}
 
 </div>
 <p class="empty" id="empty">No artists found.</p>
+<div class="load-more-wrap" id="loadMoreWrap"><button class="load-more-btn" id="loadMore" type="button">Show more artists ↓</button></div>
 </section>
 
 
@@ -889,29 +895,33 @@ button.textContent = saved ? "♥ Saved" : "♥ Favorite";
 });
 }
 
+const PAGE_SIZE = 12;
+let artistsToShow = PAGE_SIZE;
+
 function displayArtists(){
 const query = searchInput.value.toLowerCase().trim();
-let visibleCount = 0;
-
-cards.forEach(card=>{
+const matchingCards = cards.filter(card=>{
 const category = card.dataset.category;
 const isFavorite = favorites.includes(card.dataset.name);
-
 const matchesSearch = card.textContent.toLowerCase().includes(query);
-const matchesFilter =
-currentFilter === "all" ||
-category === currentFilter ||
+const matchesFilter = currentFilter === "all" || category === currentFilter ||
 (currentFilter === "favorites" && isFavorite);
-
-const visible = matchesSearch && matchesFilter;
-card.style.display = visible ? "" : "none";
-if(visible) visibleCount++;
+return matchesSearch && matchesFilter;
 });
-
+cards.forEach(card=>{ card.style.display = "none"; });
+matchingCards.slice(0, artistsToShow).forEach(card=>{ card.style.display = ""; });
+const visibleCount = matchingCards.length;
 emptyMessage.style.display = visibleCount ? "none" : "block";
+const countLabel = document.getElementById("artistCount");
+if(countLabel) countLabel.textContent = visibleCount ? `Showing ${Math.min(artistsToShow, visibleCount)} of ${visibleCount} artists` : "No matching artists";
+const moreWrap = document.getElementById("loadMoreWrap");
+const moreButton = document.getElementById("loadMore");
+if(moreWrap) moreWrap.style.display = visibleCount > artistsToShow ? "block" : "none";
+if(moreButton) moreButton.textContent = `Show ${Math.min(PAGE_SIZE, visibleCount-artistsToShow)} more artists ↓`;
 }
 
-searchInput.addEventListener("input", displayArtists);
+searchInput.addEventListener("input", ()=>{ artistsToShow = PAGE_SIZE; displayArtists(); });
+document.getElementById("loadMore")?.addEventListener("click", ()=>{ artistsToShow += PAGE_SIZE; displayArtists(); });
 
 const shareSiteButton = document.getElementById("shareSite");
 const shareStatus = document.getElementById("shareStatus");
@@ -983,6 +993,7 @@ button.addEventListener("click",()=>{
 filters.forEach(item=>item.classList.remove("active"));
 button.classList.add("active");
 currentFilter = button.dataset.filter;
+artistsToShow = PAGE_SIZE;
 displayArtists();
 });
 });
@@ -999,6 +1010,7 @@ favorites.push(name);
 
 try { localStorage.setItem("musicVibeFavorites", JSON.stringify(favorites)); } catch (error) { /* Favorites remain available until this page is closed. */ }
 updateFavoriteButtons();
+artistsToShow = PAGE_SIZE;
 displayArtists();
 });
 });
