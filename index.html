@@ -490,7 +490,7 @@ section{padding:40px 5%}
 
 <section id="radio">
 <h2 class="section-title">MUSIC VIBE Radio</h2>
-<p class="section-sub">Discover independent electronic, pop, jazz, ambient and Tunisian-inspired sounds. The first 14 tracks are listed as CC0 by Nullrights; Atlas • Tunisia is shared under the Pixabay Content License.</p>
+<p class="section-sub">Discover independent electronic, pop, jazz, ambient and Tunisian-inspired sounds. Most Vibe Radio selections link to Nullrights CC0 recordings; three track pages still need individual verification. Atlas • Tunisia links to Pixabay under its Content License.</p>
 <div class="radio-layout">
   <div class="radio-main">
     <div class="radio-topline"><span class="radio-live"><i></i> MUSIC VIBE RADIO</span><span class="radio-count" id="radioPosition">TRACK 01 / 15</span></div>
@@ -747,20 +747,20 @@ displayArtists();
 
 
 const radioTracks = [
-  {title:"Klatch",artist:"CXR ATK · Electronic",id:"g0enboi9vv"},
-  {title:"FL Version of October Jazz",artist:"Pro Sensory · Jazz",id:"omsbc6sp8x"},
-  {title:"Fevered Dream",artist:"Tsorthan Grove · Ambient",id:"uae5h00ab7"},
-  {title:"Aliens",artist:"oglsdl · Electronic",id:"w6p8r92ozi"},
-  {title:"Blossom Mountain BPM 140",artist:"MintoDog · Game / Electronic",id:"o6ugnso1yu"},
-  {title:"Darkness Road BPM 165",artist:"MintoDog · Synth / Electronic",id:"5pk2gg7y1v"},
-  {title:"+82KOREA",artist:"Superrichmimi · Pop",id:"44gronsmn9"},
-  {title:"Aashayein",artist:"Superrichmimi · Pop",id:"rzvijlfi2e"},
-  {title:"Alarm from a Beauty",artist:"Superrichmimi · Pop",id:"blp309o6nf"},
-  {title:"Fine Dining BGM",artist:"Lao Ban · Jazz",id:"6bazoqwvtt"},
-  {title:"Just Do!",artist:"Lao Ban · Pop",id:"eotcfr6107"},
-  {title:"Please hold",artist:"Nullrights · CC0",id:"mrsi4oguht"},
-  {title:"elevate",artist:"Nullrights · CC0",id:"5gcryw5w8m"},
-  {title:"Cosmic Waves",artist:"Nullrights · CC0",id:"bzditqj2dq"},
+  {title:"Klatch",artist:"CXR ATK · Electronic",id:"g0enboi9vv",verified:true},
+  {title:"FL Version of October Jazz",artist:"Pro Sensory · Jazz",id:"omsbc6sp8x",verified:false},
+  {title:"Fevered Dream",artist:"Tsorthan Grove · Ambient",id:"uae5h00ab7",verified:false},
+  {title:"Aliens",artist:"oglsdl · Electronic",id:"w6p8r92ozi",verified:false},
+  {title:"Blossom Mountain BPM 140",artist:"MintoDog · Game / Electronic",id:"o6ugnso1yu",verified:true},
+  {title:"Darkness Road BPM 165",artist:"MintoDog · Synth / Electronic",id:"5pk2gg7y1v",verified:true},
+  {title:"+82KOREA",artist:"Superrichmimi · Pop",id:"44gronsmn9",verified:true},
+  {title:"Aashayein",artist:"Superrichmimi · Pop",id:"rzvijlfi2e",verified:true},
+  {title:"Alarm from a Beauty",artist:"Superrichmimi · Pop",id:"blp309o6nf",verified:true},
+  {title:"Fine Dining BGM",artist:"Lao Ban · Jazz",id:"6bazoqwvtt",verified:true},
+  {title:"Just Do!",artist:"Lao Ban · Pop",id:"eotcfr6107",verified:true},
+  {title:"Please hold",artist:"Ondrosik · Easy Listening",id:"mrsi4oguht",verified:true},
+  {title:"elevate",artist:"Fupi · Electronic",id:"5gcryw5w8m",verified:true},
+  {title:"Cosmic Waves",artist:"HoliznaCC0 · Ambient",id:"bzditqj2dq",verified:true},
   {title:"Atlas • Tunisia",artist:"Vadim_Makes_Sound · Mezoued-inspired · Pixabay",url:"https://pixabay.com/music/world-atlas-tunisia-595084/"}
 ];
 let radioIndex = 0;
@@ -781,8 +781,10 @@ function selectRadioTrack(index){
     externalLink.href = track.url;
     externalLink.style.display = "inline-block";
   }else{
-    licenseLabel.textContent = "License: CC0 1.0 · Nullrights";
-    licenseNote.innerHTML = 'Nullrights lists this recording under CC0 1.0. Playback controls are provided by the embedded player. <a href="https://nullrights.com/" target="_blank" rel="noopener" style="color:#c084fc">License source</a>.';
+    licenseLabel.textContent = track.verified ? "License: CC0 1.0 · Nullrights" : "License: pending individual verification";
+    licenseNote.innerHTML = track.verified
+      ? 'This track has an individual Nullrights page displaying CC0 1.0. <a href="https://nullrights.com/track/' + track.id + '" target="_blank" rel="noopener" style="color:#c084fc">View track and license</a>.'
+      : 'We have not yet confirmed this track\'s individual license page. Treat its license as unverified until checked. <a href="https://nullrights.com/track/' + track.id + '" target="_blank" rel="noopener" style="color:#c084fc">Check track page</a>.';
     radioEmbed.style.display = "block";
     radioEmbed.src = "https://nullrights.com/embed/" + track.id;
     externalLink.style.display = "none";
