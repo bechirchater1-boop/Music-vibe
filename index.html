@@ -165,6 +165,19 @@ section{padding:40px 5%}
 .radio-track strong{display:block;font-size:13px}
 .radio-track small{display:block;color:#999;font-size:11px}
 .radio-track.active strong{color:#d8b4fe}
+.radio-list-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.radio-list-head span{font-size:10px;color:#a78bbd;font-weight:800;letter-spacing:1px}
+.radio-search-row{display:flex;align-items:center;gap:8px;margin:10px 0 8px}
+.radio-search-row .radio-search{margin:0;min-width:0;flex:1}
+.radio-clear{flex:0 0 auto;border:1px solid #49365c;background:#241a30;color:#e9d5ff;border-radius:10px;padding:10px 12px;font-size:12px;font-weight:700;cursor:pointer}
+.radio-results{font-size:11px;color:#a99ab6;margin:0 5px 7px}
+.radio-empty{display:none;padding:18px 10px;text-align:center;color:#b8a9c6;font-size:13px}
+@media(max-width:720px){
+.radio-list{max-height:420px;padding:12px}
+.radio-track{min-height:58px;padding:12px 10px}
+.radio-controls button{min-height:46px}
+.radio-search-row{position:sticky;top:0;z-index:3;background:#15121e;padding:5px 0}
+}
 @media(max-width:720px){.radio-layout{grid-template-columns:1fr}.radio-list{max-height:300px}.radio-main{padding:16px}}
 
 
@@ -738,7 +751,12 @@ section{padding:40px 5%}
   </div>
   <div class="radio-list" id="radioList">
     <div class="radio-list-head"><h3>Your playlist</h3><span>15 TRACKS</span></div>
-    <input class="radio-search" id="radioSearch" type="search" aria-label="Search radio playlist" placeholder="Search this playlist...">
+    <div class="radio-search-row">
+      <input class="radio-search" id="radioSearch" type="search" aria-label="Search radio playlist" placeholder="Search this playlist...">
+      <button class="radio-clear" id="radioClearSearch" type="button" aria-label="Clear playlist search">Clear</button>
+    </div>
+    <p class="radio-results" id="radioResults" aria-live="polite">Showing all 15 tracks</p>
+    <p class="radio-empty" id="radioEmpty">No tracks found. Try another search.</p>
     <button class="radio-track active" type="button" data-track="0"><span class="track-num">01</span><span class="track-meta"><strong>Klatch</strong><small>CXR ATK · Electronic · 2:57</small></span><span class="track-mark">♫</span></button>
     <button class="radio-track" type="button" data-track="1"><span class="track-num">02</span><span class="track-meta"><strong>FL Version of October Jazz</strong><small>Pro Sensory · Jazz</small></span><span class="track-mark">♫</span></button>
     <button class="radio-track" type="button" data-track="2"><span class="track-num">03</span><span class="track-meta"><strong>Fevered Dream</strong><small>Tsorthan Grove · Ambient</small></span><span class="track-mark">♫</span></button>
@@ -1075,11 +1093,26 @@ document.querySelectorAll(".radio-track").forEach(button=>{
 });
 document.getElementById("radioPrev").addEventListener("click",()=>selectRadioTrack(radioIndex-1));
 document.getElementById("radioNext").addEventListener("click",()=>selectRadioTrack(radioIndex+1));
-document.getElementById("radioSearch").addEventListener("input",event=>{
-  const query = event.target.value.toLowerCase().trim();
-  document.querySelectorAll(".radio-track").forEach(button=>{
-    button.style.display = button.textContent.toLowerCase().includes(query) ? "flex" : "none";
+const radioSearch = document.getElementById("radioSearch");
+const radioTrackButtons = Array.from(document.querySelectorAll(".radio-track"));
+function filterRadioTracks(){
+  const query = radioSearch.value.toLowerCase().trim();
+  let visible = 0;
+  radioTrackButtons.forEach(button=>{
+    const match = button.textContent.toLowerCase().includes(query);
+    button.style.display = match ? "flex" : "none";
+    if(match) visible++;
   });
+  document.getElementById("radioResults").textContent = query
+    ? "Showing " + visible + " of " + radioTracks.length + " tracks"
+    : "Showing all " + radioTracks.length + " tracks";
+  document.getElementById("radioEmpty").style.display = visible ? "none" : "block";
+}
+radioSearch.addEventListener("input",filterRadioTracks);
+document.getElementById("radioClearSearch").addEventListener("click",()=>{
+  radioSearch.value = "";
+  filterRadioTracks();
+  radioSearch.focus();
 });
 
 updateFavoriteButtons();
