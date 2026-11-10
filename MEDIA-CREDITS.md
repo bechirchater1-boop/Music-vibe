@@ -54,3 +54,10 @@ Sources:
 3. Save evidence for each Nullrights track's CC0 status and for the Pixabay track's license.
 4. Do not offer third-party music files as standalone downloads unless the applicable license explicitly allows it.
 5. Keep a clear copyright contact method and respond promptly to legitimate rights-holder requests.
+
+
+### Lil Baby
+- Portrait: [Lil Baby in 2020.png](https://commons.wikimedia.org/wiki/File:Lil_Baby_in_2020.png)
+- Creator/source: Icebox; screenshot from the Icebox YouTube video (original source linked on the Commons file page).
+- License: Creative Commons Attribution 3.0 Unported (CC BY 3.0).
+- Attribution: “Lil Baby at Icebox in 2020” by Icebox, via Wikimedia Commons, CC BY 3.0. Link to the [license](https://creativecommons.org/licenses/by/3.0/) and [file page](https://commons.wikimedia.org/wiki/File:Lil_Baby_in_2020.png).
