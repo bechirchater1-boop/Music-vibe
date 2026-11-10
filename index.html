@@ -304,9 +304,9 @@ section{padding:40px 5%}
 .artist-song-info{min-width:0;flex:1}
 .artist-song-info strong,.artist-song-info small{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .artist-song-info small{color:#a99ab6;font-size:11px}
-.artist-song audio{width:150px;max-width:38%;height:34px}
+.artist-preview-btn{flex:none;border:1px solid #8b45bd;background:#39204f;color:#fff;border-radius:20px;padding:8px 12px;font-size:12px;font-weight:800;cursor:pointer;white-space:nowrap}.artist-preview-btn:hover,.artist-preview-btn.playing{background:#9333ea;border-color:#c084fc}.artist-preview-btn:disabled{opacity:.45;cursor:not-allowed}
 .artist-song-link{color:#d8b4fe;font-size:12px;font-weight:700;white-space:nowrap}
-@media(max-width:600px){.artist-songs-panel{padding:14px}.artist-song{flex-wrap:wrap}.artist-song audio{max-width:none;width:100%}}
+@media(max-width:600px){.artist-songs-panel{padding:14px}.artist-song{flex-wrap:wrap}.artist-preview-btn{min-height:38px}}
 
 </style>
 </head>
@@ -1071,6 +1071,7 @@ function openArtistSongs(artistName){
   const requestId = ++artistSongsRequest;
   artistSongsTitle.textContent = artistName + " — Songs";
   artistSongsStatus.textContent = "Loading songs…";
+  artistSongList.querySelectorAll("audio").forEach(audio=>audio.pause());
   artistSongList.replaceChildren();
   artistSongsPanel.classList.add("open");
   artistSongsPanel.scrollIntoView({behavior:"smooth",block:"start"});
@@ -1090,7 +1091,46 @@ function openArtistSongs(artistName){
       const title=document.createElement("strong"); title.textContent=track.trackName || "Unknown track";
       const meta=document.createElement("small"); meta.textContent=(track.artistName || artistName) + (track.collectionName ? " · " + track.collectionName : "");
       info.append(title,meta); row.append(cover,info);
-      if(track.previewUrl){const audio=document.createElement("audio");audio.controls=true;audio.preload="none";audio.src=track.previewUrl;audio.setAttribute("aria-label","Preview "+(track.trackName||"song"));row.append(audio);}
+      const previewButton=document.createElement("button");
+      previewButton.type="button";
+      previewButton.className="artist-preview-btn";
+      previewButton.textContent=track.previewUrl ? "▶ Play preview" : "Preview unavailable";
+      previewButton.disabled=!track.previewUrl;
+      if(track.previewUrl){
+        const audio=document.createElement("audio");
+        audio.preload="none";
+        audio.src=track.previewUrl;
+        audio.setAttribute("aria-label","Preview "+(track.trackName||"song"));
+        previewButton.addEventListener("click",async()=>{
+          const wasPlaying=!audio.paused;
+          artistSongList.querySelectorAll("audio").forEach(other=>{
+            if(other!==audio){other.pause();other.currentTime=0;}
+            const otherButton=other.parentElement?.querySelector(".artist-preview-btn");
+            if(otherButton){otherButton.textContent="▶ Play preview";otherButton.classList.remove("playing");}
+          });
+          if(wasPlaying){audio.pause();previewButton.textContent="▶ Play preview";previewButton.classList.remove("playing");return;}
+          try{
+            await audio.play();
+            previewButton.textContent="Ⅱ Pause";
+            previewButton.classList.add("playing");
+          }catch(error){
+            previewButton.textContent="Preview unavailable";
+            previewButton.disabled=true;
+          }
+        });
+        audio.addEventListener("ended",()=>{
+          previewButton.textContent="▶ Play preview";
+          previewButton.classList.remove("playing");
+        });
+        audio.addEventListener("pause",()=>{
+          if(audio.ended || audio.currentTime===0 || audio.paused){
+            previewButton.textContent="▶ Play preview";
+            previewButton.classList.remove("playing");
+          }
+        });
+        row.append(audio);
+      }
+      row.append(previewButton);
       const link=document.createElement("a");link.className="artist-song-link";link.href=track.trackViewUrl || ("https://open.spotify.com/search/"+encodeURIComponent(artistName+" "+(track.trackName||"")));link.target="_blank";link.rel="noopener noreferrer";link.textContent=track.trackViewUrl ? "Open this exact song ↗" : "Find on Spotify ↗";row.append(link);
       artistSongList.append(row);
     });
