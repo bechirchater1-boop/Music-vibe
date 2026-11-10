@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#090811">
-<meta name="description" content="Discover Tunisian rap artists like Samara, Balti, Klay BBJ and Nordo, explore Arabic hits and international music, and find new sounds on MUSIC VIBE.">
+<meta name="description" content="Discover Tunisian rap, Arabic and international music, explore artists, VIBE RADIO and the latest music news on MUSIC VIBE.">
 <meta name="google-site-verification" content="8o0RAgg5fT0uXOgthV9aRfXids5gpw9qRdrUhUJOVSA">
 <meta name="robots" content="index,follow,max-image-preview:large">
 <meta property="og:title" content="MUSIC VIBE | Discover Your Sound">
-<meta property="og:description" content="Explore Tunisian rap artists, Arabic hits, international music and fresh sounds on MUSIC VIBE.">
+<meta property="og:description" content="Explore Tunisian rap, Arabic hits, international artists, VIBE RADIO and fresh music news on MUSIC VIBE.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://music-vibe.bechirchater1.workers.dev/">
 <meta name="twitter:card" content="summary">
@@ -267,6 +267,26 @@ section{padding:40px 5%}
 
 
 .artist-image-fallback{position:absolute;inset:0;display:grid;place-items:center;font-size:38px;font-weight:900;letter-spacing:2px;color:#fff;background:radial-gradient(circle at 70% 20%,#a855f766,transparent 32%),linear-gradient(135deg,#42205f,#171222 65%,#0c0b12);text-shadow:0 5px 24px #0009}
+
+/* MUSIC NEWS */
+.news-toolbar{display:flex;flex-direction:column;gap:2px}
+.news-search{max-width:620px}
+.news-filters{margin-bottom:10px}
+.news-count{font-size:12px;color:#bda9cf;margin:0 0 14px}
+.news-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.news-card{background:linear-gradient(155deg,#1b1625,#111019 75%);border:1px solid #382b48;border-radius:16px;padding:19px;display:flex;flex-direction:column;min-height:245px;box-shadow:0 10px 28px #0003}
+.news-card:hover{border-color:#9b5bd0;transform:translateY(-2px);transition:.2s}
+.news-card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.news-tag{font-size:10px;font-weight:900;letter-spacing:1.2px;color:#eadcff;background:#39234f;border:1px solid #68418b;padding:5px 9px;border-radius:20px}
+.news-symbol{font-size:25px}
+.news-date{font-size:11px;color:#a99ab6;margin-bottom:7px}
+.news-card h3{font-size:18px;line-height:1.35;margin-bottom:9px}
+.news-card>p:not(.news-date){font-size:13px;color:#b9afc4;line-height:1.6;margin-bottom:15px}
+.news-link{margin-top:auto;align-self:flex-start;color:#d8b4fe;font-size:13px;font-weight:800}
+.news-link:hover{color:#fff}
+.news-footnote{font-size:11px;color:#8f849b;margin-top:16px}
+@media(max-width:600px){.news-grid{grid-template-columns:1fr}.news-card{min-height:0}.news-filters{flex-wrap:nowrap;overflow-x:auto;padding-bottom:8px}.news-filters .filter{flex:0 0 auto}}
+
 </style>
 </head>
 
@@ -278,6 +298,7 @@ section{padding:40px 5%}
 <nav>
 <a href="#artists">Artists</a>
 <a href="#radio">Vibe Radio</a>
+<a href="#news">Music News</a>
 <a href="#playlist">Playlist</a>
 <a href="#guides">Guides</a>
 <a href="#faq">FAQ</a>
@@ -791,6 +812,46 @@ section{padding:40px 5%}
 </div>
 </section>
 
+
+<section id="news">
+<h2 class="section-title">Music News</h2>
+<p class="section-sub">Fresh updates from Tunisian, Arabic and international music — releases, music videos, collaborations and artist stories. Each headline links to its original publisher.</p>
+<div class="news-toolbar">
+<input class="search-box news-search" id="newsSearch" type="search" aria-label="Search music news" placeholder="Search artists or news...">
+<div class="filters news-filters" aria-label="Filter music news">
+<button class="filter active" type="button" data-news-filter="all">All News</button>
+<button class="filter" type="button" data-news-filter="tunisia">Tunisia</button>
+<button class="filter" type="button" data-news-filter="arabic">Arabic</button>
+<button class="filter" type="button" data-news-filter="world">World</button>
+</div>
+</div>
+<p class="news-count" id="newsCount" aria-live="polite">Showing 3 stories</p>
+<div class="news-grid" id="newsGrid">
+<article class="news-card" data-news-category="tunisia" data-news-title="Akhras Nordo Ghadara Tunisian collaboration music video">
+<div class="news-card-top"><span class="news-tag">TUNISIA</span><span class="news-symbol" aria-hidden="true">🇹🇳</span></div>
+<p class="news-date">5 November 2026 · Arabsounds</p>
+<h3>Akhras x Nordo share “Ghadara”</h3>
+<p>Arabsounds lists “Ghadara” as a new music video from Akhras and Tunisian artist Nordo. Open the source to check the video and its release details.</p>
+<a class="news-link" href="https://www.arabsounds.net/videos/akhras-x-nordo-ghadara/" target="_blank" rel="noopener noreferrer">Read source ↗</a>
+</article>
+<article class="news-card" data-news-category="arabic" data-news-title="Elyanna Ghazali new single music video Arabic pop">
+<div class="news-card-top"><span class="news-tag">ARABIC</span><span class="news-symbol" aria-hidden="true">🎤</span></div>
+<p class="news-date">7 November 2026 · Arab News</p>
+<h3>Elyanna releases “Ghazali”</h3>
+<p>The Palestinian-Chilean singer released a new single with an accompanying video, built around lively percussion and a celebratory sound.</p>
+<a class="news-link" href="https://www.arabnews.com/art-culture/elyanna-releases-new-single-ghazali-3010283" target="_blank" rel="noopener noreferrer">Read source ↗</a>
+</article>
+<article class="news-card" data-news-category="world" data-news-title="U2 Carnaval de Luz new album review music">
+<div class="news-card-top"><span class="news-tag">WORLD</span><span class="news-symbol" aria-hidden="true">🌍</span></div>
+<p class="news-date">9 November 2026 · The Guardian</p>
+<h3>U2 return with “Carnaval de Luz”</h3>
+<p>The Guardian reviews U2’s first album of new songs in nearly a decade, describing it as an energetic and uplifting return.</p>
+<a class="news-link" href="https://www.theguardian.com/music/2026/nov/09/u2-carnaval-de-luz-review" target="_blank" rel="noopener noreferrer">Read source ↗</a>
+</article>
+</div>
+<p class="news-footnote">News is curated by MUSIC VIBE and may not update automatically. Always open the publisher for the full story and latest corrections.</p>
+</section>
+
 <section id="playlist">
 <h2 class="section-title">Tunisian Rap Playlist</h2>
 <p class="section-sub">Listen to a selection of Tunisian rap on Spotify.</p>
@@ -911,6 +972,30 @@ loading="lazy">
 </footer>
 
 <script>
+
+const newsSearch = document.getElementById("newsSearch");
+const newsCards = Array.from(document.querySelectorAll(".news-card"));
+const newsFilterButtons = Array.from(document.querySelectorAll("[data-news-filter]"));
+let activeNewsFilter = "all";
+function filterMusicNews(){
+  const query = newsSearch.value.toLowerCase().trim();
+  let shown = 0;
+  newsCards.forEach(card=>{
+    const matchesText = (card.dataset.newsTitle + " " + card.textContent).toLowerCase().includes(query);
+    const matchesCategory = activeNewsFilter === "all" || card.dataset.newsCategory === activeNewsFilter;
+    const visible = matchesText && matchesCategory;
+    card.style.display = visible ? "" : "none";
+    if(visible) shown++;
+  });
+  document.getElementById("newsCount").textContent = "Showing " + shown + " of " + newsCards.length + " stories";
+}
+newsSearch.addEventListener("input", filterMusicNews);
+newsFilterButtons.forEach(button=>button.addEventListener("click",()=>{
+  activeNewsFilter = button.dataset.newsFilter;
+  newsFilterButtons.forEach(item=>item.classList.toggle("active",item===button));
+  filterMusicNews();
+}));
+
 const searchInput = document.getElementById("search");
 const cards = [...document.querySelectorAll(".artist-card")];
 const filters = [...document.querySelectorAll(".filter")];
