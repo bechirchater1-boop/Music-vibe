@@ -1091,7 +1091,7 @@ function openArtistSongs(artistName){
       const meta=document.createElement("small"); meta.textContent=(track.artistName || artistName) + (track.collectionName ? " · " + track.collectionName : "");
       info.append(title,meta); row.append(cover,info);
       if(track.previewUrl){const audio=document.createElement("audio");audio.controls=true;audio.preload="none";audio.src=track.previewUrl;audio.setAttribute("aria-label","Preview "+(track.trackName||"song"));row.append(audio);}
-      const link=document.createElement("a");link.className="artist-song-link";link.href=track.trackViewUrl || ("https://music.apple.com/search?term="+encodeURIComponent(artistName+" "+(track.trackName||"")));link.target="_blank";link.rel="noopener noreferrer";link.textContent="Open song ↗";row.append(link);
+      const link=document.createElement("a");link.className="artist-song-link";link.href="https://open.spotify.com/search/"+encodeURIComponent(artistName+" "+(track.trackName||""));link.target="_blank";link.rel="noopener noreferrer";link.textContent="Full song on Spotify ↗";row.append(link);
       artistSongList.append(row);
     });
   }).catch(()=>{
