@@ -288,6 +288,26 @@ section{padding:40px 5%}
 .news-footnote{font-size:11px;color:#8f849b;margin-top:16px}
 @media(max-width:600px){.news-grid{grid-template-columns:1fr}.news-card{min-height:0}.news-filters{flex-wrap:nowrap;overflow-x:auto;padding-bottom:8px}.news-filters .filter{flex:0 0 auto}}
 
+
+/* Click an artist portrait or name to reveal their songs */
+.artist-cover,.artist-card h3{cursor:pointer}
+.artist-card h3:hover{color:#d8b4fe}
+.artist-songs-panel{display:none;margin:22px 0 8px;padding:20px;border:1px solid #68418b;border-radius:18px;background:linear-gradient(145deg,#211431,#11101a);scroll-margin-top:90px}
+.artist-songs-panel.open{display:block}
+.artist-songs-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.artist-songs-head h3{font-size:21px}
+.artist-songs-close{border:1px solid #65418a;background:#2b1c39;color:#eadcff;border-radius:20px;padding:7px 13px;cursor:pointer}
+.artist-songs-status{color:#bda9cf;font-size:13px;margin:8px 0 12px}
+.artist-song-list{display:grid;gap:9px}
+.artist-song{display:flex;align-items:center;gap:12px;padding:10px;border-radius:12px;background:#ffffff08;border:1px solid #ffffff12;min-width:0}
+.artist-song img{width:48px;height:48px;object-fit:cover;border-radius:8px;flex:none}
+.artist-song-info{min-width:0;flex:1}
+.artist-song-info strong,.artist-song-info small{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.artist-song-info small{color:#a99ab6;font-size:11px}
+.artist-song audio{width:150px;max-width:38%;height:34px}
+.artist-song-link{color:#d8b4fe;font-size:12px;font-weight:700;white-space:nowrap}
+@media(max-width:600px){.artist-songs-panel{padding:14px}.artist-song{flex-wrap:wrap}.artist-song audio{max-width:none;width:100%}}
+
 </style>
 </head>
 
@@ -752,6 +772,12 @@ section{padding:40px 5%}
 </div></article>
 
 </div>
+<div class="artist-songs-panel" id="artistSongsPanel" aria-live="polite">
+<div class="artist-songs-head"><h3 id="artistSongsTitle">Artist songs</h3><button class="artist-songs-close" id="closeArtistSongs" type="button">✕ Close</button></div>
+<p class="artist-songs-status" id="artistSongsStatus">Choose an artist to discover their tracks.</p>
+<div class="artist-song-list" id="artistSongList"></div>
+<p class="artist-songs-status">Song previews are supplied by Apple/iTunes when available. Use “Open song” for the full track on its music service.</p>
+</div>
 <p class="empty" id="empty">No artists found.</p>
 <div class="load-more-wrap" id="loadMoreWrap"><button class="load-more-btn" id="loadMore" type="button">Show more artists ↓</button></div>
 </section>
@@ -1032,7 +1058,58 @@ newsFilterButtons.forEach(button=>button.addEventListener("click",()=>{
 }));
 
 const searchInput = document.getElementById("search");
+
 const cards = [...document.querySelectorAll(".artist-card")];
+
+// Load a selected artist's top matching songs using Apple's public iTunes Search API.
+const artistSongsPanel = document.getElementById("artistSongsPanel");
+const artistSongsTitle = document.getElementById("artistSongsTitle");
+const artistSongsStatus = document.getElementById("artistSongsStatus");
+const artistSongList = document.getElementById("artistSongList");
+let artistSongsRequest = 0;
+function openArtistSongs(artistName){
+  const requestId = ++artistSongsRequest;
+  artistSongsTitle.textContent = artistName + " — Songs";
+  artistSongsStatus.textContent = "Loading songs…";
+  artistSongList.replaceChildren();
+  artistSongsPanel.classList.add("open");
+  artistSongsPanel.scrollIntoView({behavior:"smooth",block:"start"});
+  const url = "https://itunes.apple.com/search?term=" + encodeURIComponent(artistName) + "&entity=song&attribute=artistTerm&limit=12&country=US";
+  fetch(url).then(response=>{
+    if(!response.ok) throw new Error("Song search unavailable");
+    return response.json();
+  }).then(data=>{
+    if(requestId !== artistSongsRequest) return;
+    const results = Array.isArray(data.results) ? data.results : [];
+    if(!results.length){artistSongsStatus.textContent="No tracks found for this artist right now.";return;}
+    artistSongsStatus.textContent = "Showing " + results.length + " songs · tap play for a preview";
+    results.forEach(track=>{
+      const row=document.createElement("div"); row.className="artist-song";
+      const cover=document.createElement("img"); cover.src=track.artworkUrl100 || ""; cover.alt=""; cover.loading="lazy";
+      const info=document.createElement("div"); info.className="artist-song-info";
+      const title=document.createElement("strong"); title.textContent=track.trackName || "Unknown track";
+      const meta=document.createElement("small"); meta.textContent=(track.artistName || artistName) + (track.collectionName ? " · " + track.collectionName : "");
+      info.append(title,meta); row.append(cover,info);
+      if(track.previewUrl){const audio=document.createElement("audio");audio.controls=true;audio.preload="none";audio.src=track.previewUrl;audio.setAttribute("aria-label","Preview "+(track.trackName||"song"));row.append(audio);}
+      const link=document.createElement("a");link.className="artist-song-link";link.href=track.trackViewUrl || ("https://music.apple.com/search?term="+encodeURIComponent(artistName+" "+(track.trackName||"")));link.target="_blank";link.rel="noopener noreferrer";link.textContent="Open song ↗";row.append(link);
+      artistSongList.append(row);
+    });
+  }).catch(()=>{
+    if(requestId !== artistSongsRequest) return;
+    artistSongsStatus.textContent="Could not load the song list. Check your connection and try again.";
+  });
+}
+document.querySelectorAll(".artist-cover,.artist-card h3").forEach(target=>{
+  target.addEventListener("click",()=>{
+    const card=target.closest(".artist-card");
+    if(card) openArtistSongs(card.dataset.name || card.querySelector("h3")?.textContent || "Artist");
+  });
+});
+document.getElementById("closeArtistSongs").addEventListener("click",()=>{
+  artistSongsPanel.classList.remove("open");
+  artistSongsRequest++;
+});
+
 const filters = [...document.querySelectorAll(".filter")];
 const emptyMessage = document.getElementById("empty");
 
