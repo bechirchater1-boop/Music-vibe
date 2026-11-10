@@ -33,10 +33,10 @@ export default {
     if (!env.ADMIN_PASSWORD || body.password!==env.ADMIN_PASSWORD) return json({error:"Mot de passe incorrect."},401);
     const expires=String(Date.now()+12*60*60*1000);
     const token=expires+"."+await sign(expires,env.ADMIN_PASSWORD);
-    return json({ok:true},{status:200,headers:{"Set-Cookie":COOKIE+"="+token+"; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=43200"}});
+    return json({ok:true},200,{"Set-Cookie":COOKIE+"="+token+"; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=43200"});
    }
-   if (url.pathname==="/api/admin/logout" && request.method==="POST") {
-    return json({ok:true},{status:200,headers:{"Set-Cookie":COOKIE+"=; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=0"}});
+   if (url.pathname==="/api/admin/session" && request.method==="GET") {\n    return (await isAdmin(request,env)) ? json({ok:true}) : json({error:"Not authenticated"},401);\n   }\n   if (url.pathname==="/api/admin/logout" && request.method==="POST") {
+    return json({ok:true},200,{"Set-Cookie":COOKIE+"=; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=0"});
    }
    if (!url.pathname.startsWith("/api/admin/")) return json({error:"Not found"},404);
    if (!(await isAdmin(request,env))) return json({error:"Connexion administrateur requise."},401);
