@@ -474,10 +474,10 @@ section{padding:40px 5%}
 
 <section id="radio">
 <h2 class="section-title">MUSIC VIBE Radio</h2>
-<p class="section-sub">A hand-picked mix of independent electronic, pop, jazz and chill sounds. Every track below is marked CC0 / public domain.</p>
+<p class="section-sub">A hand-picked mix of independent electronic, pop, jazz, ambient and chill sounds. Every track is listed as CC0 / public domain by Nullrights.</p>
 <div class="radio-layout">
   <div class="radio-main">
-    <div class="radio-topline"><span class="radio-live"><i></i> MUSIC VIBE RADIO</span><span class="radio-count" id="radioPosition">TRACK 01 / 11</span></div>
+    <div class="radio-topline"><span class="radio-live"><i></i> MUSIC VIBE RADIO</span><span class="radio-count" id="radioPosition">TRACK 01 / 14</span></div>
     <div class="radio-art"><span>♫</span></div>
     <div class="radio-kicker">Now selected · CC0 music</div>
     <h3 id="radioTitle">Klatch</h3>
@@ -490,7 +490,7 @@ section{padding:40px 5%}
     <p class="radio-license">CC0 1.0 · Free for personal and commercial use. Playback controls are provided by the track's embedded player.</p>
   </div>
   <div class="radio-list" id="radioList">
-    <div class="radio-list-head"><h3>Your playlist</h3><span>11 TRACKS</span></div>
+    <div class="radio-list-head"><h3>Your playlist</h3><span>14 TRACKS</span></div>
     <input class="radio-search" id="radioSearch" type="search" placeholder="Search this playlist...">
     <button class="radio-track active" type="button" data-track="0"><span class="track-num">01</span><span class="track-meta"><strong>Klatch</strong><small>CXR ATK · Electronic · 2:57</small></span><span class="track-mark">♫</span></button>
     <button class="radio-track" type="button" data-track="1"><span class="track-num">02</span><span class="track-meta"><strong>FL Version of October Jazz</strong><small>Pro Sensory · Jazz</small></span><span class="track-mark">♫</span></button>
@@ -503,6 +503,9 @@ section{padding:40px 5%}
     <button class="radio-track" type="button" data-track="8"><span class="track-num">09</span><span class="track-meta"><strong>Alarm from a Beauty</strong><small>Superrichmimi · Pop · 1:27</small></span><span class="track-mark">♫</span></button>
     <button class="radio-track" type="button" data-track="9"><span class="track-num">10</span><span class="track-meta"><strong>Fine Dining BGM</strong><small>Lao Ban · Jazz · 2:37</small></span><span class="track-mark">♫</span></button>
     <button class="radio-track" type="button" data-track="10"><span class="track-num">11</span><span class="track-meta"><strong>Just Do!</strong><small>Lao Ban · Pop · 3:10</small></span><span class="track-mark">♫</span></button>
+    <button class="radio-track" type="button" data-track="11"><span class="track-num">12</span><span class="track-meta"><strong>Please hold</strong><small>CC0 · Nullrights selection</small></span><span class="track-mark">♫</span></button>
+    <button class="radio-track" type="button" data-track="12"><span class="track-num">13</span><span class="track-meta"><strong>elevate</strong><small>CC0 · Nullrights selection</small></span><span class="track-mark">♫</span></button>
+    <button class="radio-track" type="button" data-track="13"><span class="track-num">14</span><span class="track-meta"><strong>Cosmic Waves</strong><small>CC0 · Nullrights selection</small></span><span class="track-mark">♫</span></button>
     <p style="font-size:11px;color:#8f829b;margin:10px 5px 2px">Music courtesy of <a href="https://nullrights.com/" target="_blank" rel="noopener" style="color:#c084fc">nullrights</a>. Track pages show the CC0 license.</p>
   </div>
 </div>
@@ -690,7 +693,10 @@ const radioTracks = [
   {title:"Aashayein",artist:"Superrichmimi · Pop",id:"rzvijlfi2e"},
   {title:"Alarm from a Beauty",artist:"Superrichmimi · Pop",id:"blp309o6nf"},
   {title:"Fine Dining BGM",artist:"Lao Ban · Jazz",id:"6bazoqwvtt"},
-  {title:"Just Do!",artist:"Lao Ban · Pop",id:"eotcfr6107"}
+  {title:"Just Do!",artist:"Lao Ban · Pop",id:"eotcfr6107"},
+  {title:"Please hold",artist:"Nullrights · CC0",id:"mrsi4oguht"},
+  {title:"elevate",artist:"Nullrights · CC0",id:"5gcryw5w8m"},
+  {title:"Cosmic Waves",artist:"Nullrights · CC0",id:"bzditqj2dq"}
 ];
 let radioIndex = 0;
 function selectRadioTrack(index){
