@@ -1208,9 +1208,20 @@ function openArtistSongs(artistName){
   });
 }
 document.querySelectorAll(".artist-cover,.artist-card h3").forEach(target=>{
-  target.addEventListener("click",()=>{
-    const card=target.closest(".artist-card");
-    if(card) openArtistSongs(card.dataset.name || card.querySelector("h3")?.textContent || "Artist");
+  const card = target.closest(".artist-card");
+  const artistName = card?.dataset.name || card?.querySelector("h3")?.textContent || "Artist";
+  target.style.cursor = "pointer";
+  target.setAttribute("role", "button");
+  target.setAttribute("tabindex", "0");
+  target.setAttribute("aria-label", "Discover songs by " + artistName);
+  target.setAttribute("aria-controls", "artistSongsPanel");
+  const open = () => openArtistSongs(artistName);
+  target.addEventListener("click", open);
+  target.addEventListener("keydown", event => {
+    if(event.key === "Enter" || event.key === " "){
+      event.preventDefault();
+      open();
+    }
   });
 });
 document.getElementById("closeArtistSongs").addEventListener("click",()=>{
