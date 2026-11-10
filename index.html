@@ -1077,20 +1077,59 @@ function openArtistSongs(artistName){
   artistSongsPanel.scrollIntoView({behavior:"smooth",block:"start"});
   const normalizedArtist = artistName.normalize("NFD").replace(/[\\u0300-\\u036f]/g,"").toLowerCase().trim();
   if(normalizedArtist === "samara" || normalizedArtist === "samara riahi"){
-    artistSongsStatus.textContent = "Official Samara channel · latest uploads and songs";
-    const officialFrame = document.createElement("iframe");
-    officialFrame.src = "https://www.youtube-nocookie.com/embed/videoseries?list=UUEonTFGPeAX7fmq28pfs6Vg";
-    officialFrame.title = "Samara official YouTube uploads";
-    officialFrame.loading = "lazy";
-    officialFrame.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
-    officialFrame.allowFullscreen = true;
-    artistSongList.append(officialFrame);
+    artistSongsStatus.textContent = "Official Samara videos · choose a song to play";
+    const samaraTracks = [
+      {title:"Souk", detail:"Official Music Video · Trafiquant Album", id:"ZjrZWIISlY8"},
+      {title:"Galbi", detail:"Official Music Video", id:"2AShpYyyeJM"},
+      {title:"Galbi Taaba", detail:"Official Music Video", id:"QJEVhhtdhhM"}
+    ];
+    const player = document.createElement("iframe");
+    player.title = "Samara official music video player";
+    player.loading = "lazy";
+    player.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+    player.allowFullscreen = true;
+    player.src = "https://www.youtube-nocookie.com/embed/ZjrZWIISlY8";
+    artistSongList.append(player);
+    samaraTracks.forEach((track,index)=>{
+      const row = document.createElement("div");
+      row.className = "artist-song";
+      const cover = document.createElement("img");
+      cover.src = "https://i.ytimg.com/vi/" + track.id + "/hqdefault.jpg";
+      cover.alt = track.title + " cover";
+      cover.loading = "lazy";
+      const info = document.createElement("div");
+      info.className = "artist-song-info";
+      const title = document.createElement("strong");
+      title.textContent = track.title;
+      const meta = document.createElement("small");
+      meta.textContent = track.detail + " · Samara";
+      info.append(title,meta);
+      const play = document.createElement("button");
+      play.type = "button";
+      play.className = "artist-preview-btn";
+      play.textContent = index === 0 ? "▶ Playing" : "▶ Play";
+      play.addEventListener("click",()=>{
+        player.src = "https://www.youtube-nocookie.com/embed/" + track.id + "?autoplay=1";
+        artistSongList.querySelectorAll(".artist-preview-btn").forEach(button=>{
+          button.textContent = button === play ? "Ⅱ Playing" : "▶ Play";
+          button.classList.toggle("playing",button === play);
+        });
+      });
+      const open = document.createElement("a");
+      open.className = "artist-song-link";
+      open.href = "https://www.youtube.com/watch?v=" + track.id;
+      open.target = "_blank";
+      open.rel = "noopener noreferrer";
+      open.textContent = "Open exact song ↗";
+      row.append(cover,info,play,open);
+      artistSongList.append(row);
+    });
     const officialLink = document.createElement("a");
     officialLink.className = "artist-song-link";
-    officialLink.href = "https://www.youtube.com/@samara_riahi/videos";
+    officialLink.href = "https://www.youtube.com/channel/UCEonTFGPeAX7fmq28pfs6Vg";
     officialLink.target = "_blank";
     officialLink.rel = "noopener noreferrer";
-    officialLink.textContent = "Open Samara official YouTube channel ↗";
+    officialLink.textContent = "See all Samara official uploads ↗";
     artistSongList.append(officialLink);
     return;
   }
