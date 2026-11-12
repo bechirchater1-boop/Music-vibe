@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#090811">
+<title>MUSIC VIBE · Admin</title>
+<style>
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:#090811;color:#fff;font:15px/1.5 Arial,sans-serif;padding:28px 16px}
+main{max-width:760px;margin:auto}.brand{color:#c084fc;font-size:13px;font-weight:800;letter-spacing:2px}
+h1{font-size:30px;margin:8px 0 4px}.muted{color:#aaa}.panel{background:#15121e;border:1px solid #30263c;border-radius:16px;padding:20px;margin:20px 0}
+input{width:100%;padding:13px 14px;border-radius:10px;border:1px solid #49365e;background:#0f0d16;color:#fff;margin:7px 0 13px}
+button{border:0;border-radius:10px;padding:11px 15px;background:#9333ea;color:white;font-weight:700;cursor:pointer}
+button.secondary{background:#30243e}button.danger{background:#7f1d1d}
+.row{display:flex;gap:8px;flex-wrap:wrap}.row input{flex:1;min-width:180px}
+.video{border-top:1px solid #30263c;padding:14px 0}.video a{color:#d8b4fe;overflow-wrap:anywhere}.video strong{display:block;margin-bottom:5px}
+.status{min-height:22px;color:#d8b4fe;font-size:13px}.hidden{display:none!important}
+</style>
+</head>
+<body><main>
+<a href="/" style="color:#c084fc;text-decoration:none">← MUSIC VIBE</a>
+<p class="brand">MUSIC VIBE · PRIVATE BACKOFFICE</p><h1>Video management</h1>
+<p class="muted">Sign in to add, edit or remove video links.</p>
+<section class="panel" id="loginPanel">
+<h2>Administrator login</h2>
+<form id="loginForm"><label for="password">Admin password</label><input id="password" type="password" autocomplete="current-password" required><button type="submit">Sign in</button></form>
+</section>
+<section class="panel hidden" id="adminPanel">
+<div class="row" style="justify-content:space-between;align-items:center"><h2>Videos</h2><button class="secondary" id="logoutBtn" type="button">Log out</button></div>
+<form id="videoForm">
+<input id="videoTitle" maxlength="160" placeholder="Video title" required>
+<input id="videoUrl" type="url" placeholder="https://www.youtube.com/watch?v=..." required>
+<button type="submit">Add video</button>
+</form>
+<p class="status" id="status" aria-live="polite"></p><div id="videoList"></div>
+</section>
+<p class="status" id="loginStatus" aria-live="polite"></p>
+</main>
+<script>
+const loginPanel=document.getElementById("loginPanel"),adminPanel=document.getElementById("adminPanel");
+const loginStatus=document.getElementById("loginStatus"),statusEl=document.getElementById("status"),videoList=document.getElementById("videoList");
+async function api(path,options={}){const response=await fetch(path,{...options,headers:{"content-type":"application/json",...(options.headers||{})}});let data={};try{data=await response.json()}catch{}if(!response.ok)throw new Error(data.error||"Request failed");return data}
+function showAdmin(value){loginPanel.classList.toggle("hidden",value);adminPanel.classList.toggle("hidden",!value)}
+async function loadVideos(){const data=await api("/api/videos");videoList.replaceChildren();(data.videos||[]).forEach(video=>{const item=document.createElement("div");item.className="video";const title=document.createElement("strong");title.textContent=video.title;const link=document.createElement("a");link.href=video.url;link.target="_blank";link.rel="noopener noreferrer";link.textContent=video.url;const actions=document.createElement("div");actions.className="row";actions.style.marginTop="10px";const edit=document.createElement("button");edit.type="button";edit.className="secondary";edit.textContent="Edit";edit.onclick=async()=>{const titleValue=prompt("Video title:",video.title);if(titleValue===null)return;const urlValue=prompt("Video URL:",video.url);if(urlValue===null)return;try{await api("/api/admin/videos/"+video.id,{method:"PATCH",body:JSON.stringify({title:titleValue,url:urlValue})});statusEl.textContent="Video updated.";await loadVideos()}catch(e){statusEl.textContent=e.message}};const del=document.createElement("button");del.type="button";del.className="danger";del.textContent="Delete";del.onclick=async()=>{if(!confirm("Delete this video?"))return;try{await api("/api/admin/videos/"+video.id,{method:"DELETE"});statusEl.textContent="Video deleted.";await loadVideos()}catch(e){statusEl.textContent=e.message}};actions.append(edit,del);item.append(title,link,actions);videoList.append(item)});if(!(data.videos||[]).length)videoList.textContent="No videos added yet."}
+async function checkSession(){try{await api("/api/admin/session");showAdmin(true);await loadVideos()}catch{showAdmin(false)}}
+document.getElementById("loginForm").addEventListener("submit",async e=>{e.preventDefault();loginStatus.textContent="Signing in…";try{await api("/api/admin/login",{method:"POST",body:JSON.stringify({password:document.getElementById("password").value})});document.getElementById("password").value="";loginStatus.textContent="";showAdmin(true);await loadVideos()}catch(err){loginStatus.textContent=err.message}});
+document.getElementById("videoForm").addEventListener("submit",async e=>{e.preventDefault();statusEl.textContent="Saving…";try{await api("/api/admin/videos",{method:"POST",body:JSON.stringify({title:document.getElementById("videoTitle").value,url:document.getElementById("videoUrl").value})});document.getElementById("videoForm").reset();statusEl.textContent="Video added.";await loadVideos()}catch(err){statusEl.textContent=err.message}});
+document.getElementById("logoutBtn").addEventListener("click",async()=>{try{await api("/api/admin/logout",{method:"POST"})}finally{showAdmin(false);loginStatus.textContent="You are signed out."}});
+checkSession();
+</script></body></html>
