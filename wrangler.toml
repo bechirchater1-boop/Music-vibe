@@ -12,3 +12,4 @@ binding = "DB"
 database_name = "music-vibe-db"
 database_id = "9198e9a1-78dd-4a8b-af76-c452b0ca8ef0"
 # Trigger latest deployment
+# Trigger deployment 2
